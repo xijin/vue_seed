@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "presets": [
     ["env", { "modules": false }],
     "stage-2"
@@ -12,7 +11,5 @@
     }
   }
 }
-=======
     presets: ['es2015', 'stage-0']
 }
->>>>>>> ed8a87c259fc6d4eba7c6aba99c2ca86b76cd820
