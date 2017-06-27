@@ -11,8 +11,6 @@ module.exports = function() {
             next();
             return;
         }
-        console.log(req.url);
-        console.log(req.method);
         var path = req.url.lastIndexOf('?') > -1 
             ? req.url.substring(0, req.url.lastIndexOf('?')) : req.url;
         path = path.replace('.json', '.js');
