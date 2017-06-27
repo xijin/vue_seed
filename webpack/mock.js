@@ -7,18 +7,19 @@ module.exports = function() {
 
     var mock = function(req, res, next) {
 
-        if (!/.json/.test(req.url)) {
+        if (!/.json/.test(req.url) || !/hot-update/.test(req.url)) {
             console.log(req.url);
             next();
         }
-
+        console.log(req.url);
+        console.log(req.method);
         var path = req.url.lastIndexOf('?') > -1 
             ? req.url.substring(0, req.url.lastIndexOf('?')) : req.url;
         path = path.replace('.json', '.js');
         // console.log(path);
         path = path.indexOf('/') === 0 ? '../mock' + path : './mock/' + path;
+        console.log(path);
         var mock = require(path);
-        // console.log(JSON.stringify(mock));
         if (req.method === 'POST') {
             var content = '';
             req.on('data', function(data) {

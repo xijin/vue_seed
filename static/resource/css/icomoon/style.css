@@ -1,0 +1,69 @@
+@font-face {
+    font-family: 'icomoon';
+    src:    require('./icomoon/fonts/icomoon.eot?syo1jn');
+    src:    require('./icomoon/fonts/icomoon.eot?syo1jn#iefix') format('embedded-opentype'),
+        require('./icomoon/fonts/icomoon.ttf?syo1jn') format('truetype'),
+        require('./icomoon/fonts/icomoon.woff?syo1jn') format('woff'),
+        require('./icomoon/fonts/icomoon.svg?syo1jn#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-course:before {
+    content: "\e900";
+}
+.icon-ext-active:before {
+    content: "\e901";
+}
+.icon-ext:before {
+    content: "\e902";
+}
+.icon-home-active:before {
+    content: "\e903";
+}
+.icon-home:before {
+    content: "\e904";
+}
+.icon-monitor-active:before {
+    content: "\e905";
+}
+.icon-monitor:before {
+    content: "\e906";
+}
+.icon-notify-active:before {
+    content: "\e907";
+}
+.icon-notify:before {
+    content: "\e908";
+}
+.icon-org:before {
+    content: "\e909";
+}
+.icon-statistics:before {
+    content: "\e90a";
+}
+.icon-teacher:before {
+    content: "\e90b";
+}
+.icon-tool-active:before {
+    content: "\e90c";
+}
+.icon-tool:before {
+    content: "\e90d";
+}
+

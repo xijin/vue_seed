@@ -1,0 +1,125 @@
+@nomarl_blue: #428bca;
+@light_yellow: rgb(250, 144, 0);
+@bg_yellow: #fcf8e3;
+@yellow: rgb(252, 79, 0);
+@light_gray: #ccc;
+@light_blue: #7ca0e7;
+@white: #fff;
+@black: #333;
+@base_yellow: #f90;
+.green {
+  color: green;
+}
+
+ul,li {
+    list-style: none;
+}
+
+.red {
+  color: red;
+}
+
+.yellow {
+  color: #ffff00;
+}
+
+.gray {
+  color: gray;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.blue {
+  color: @nomarl_blue;
+}
+
+.light-yellow {
+  color: @light_yellow;
+}
+
+.yellow {
+  color: @yellow;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.word-break {
+  white-space: normal;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+
+.ng-cloak {
+  display: none;
+}
+
+.ellipsis {
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.normal-box {
+  padding: 10px;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  border-radius: 4px;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.xx-dialog .modal-dialog {
+  width: 1000px;
+}
+
+// hanrui 覆盖bootstrap的readonly默认样式
+.form-control[readonly] {
+  cursor: pointer;
+  background-color: #fff;
+  opacity: 1;
+}
+
+.form-control[disabled] {
+  cursor: not-allowed;
+  background-color: #eee;
+  opacity: 1;
+}
+
+.ellipsis {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cursor {
+  cursor: pointer;
+}
