@@ -90,7 +90,7 @@ export default {
 }
 
 import ajaxService from "./common/utils/ajaxService";
-ajaxService.send('/manage/getAuth.json', {data: {}});
+ajaxService.send('/manage/getAuth.json', {data: {userId: 1}});
 
 </script>
 <style lang="less" src="./common/resource/css/style.less"></style>

@@ -49,15 +49,12 @@ Object.keys(proxyTable).forEach(function (context) {
   }
   app.use(proxyMiddleware(options.filter || context, options))
 })
-console.log('mock api----');
 
 //  mock api
 app.use(require('../webpack/mock')())
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
-
-
 
 // serve webpack bundle output
 app.use(devMiddleware)
