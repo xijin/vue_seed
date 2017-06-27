@@ -4,10 +4,9 @@
  */
 'user strict';
 module.exports = function() {
-
+    
     var mock = function(req, res, next) {
-        if (!/.json$/.test(req.url) || /hot-update/.test(req.url)) {
-            console.log(req.url);
+        if (!/.json$/.test(req.url)|| /hot-update/.test(req.url)) {
             next();
             return;
         }
@@ -16,7 +15,6 @@ module.exports = function() {
         path = path.replace('.json', '.js');
         // console.log(path);
         path = path.indexOf('/') === 0 ? '../mock' + path : './mock/' + path;
-        console.log(path);
         var mock = require(path);
         if (req.method === 'POST') {
             var content = '';

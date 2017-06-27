@@ -21,17 +21,9 @@ export default {
             }
             result.originType = data.type;
             var curRole = data.currentRole || (data.accountDto && data.accountDto.currentRole);
-            result.permission =curRole.hasPermissions;
+            result.permission = curRole.hasPermissions;
             result.curRole = curRole;
             result.loginAccount = data.loginAccount;
-            result.type =
-                this.getTypeFromTag(curRole.tag);
-            result.systemType =
-                this.getSystemTypeFromTag(curRole.tag);
-            result.roleType =
-                this.getRoleTypeFromTag(curRole.tag);
-            result.accountType =
-                this.getAccountTypeFromTag(curRole.tag);
             result.openRoleUid = curRole.openRoleUid;
             Vue.prototype.userInfo = result;
         }

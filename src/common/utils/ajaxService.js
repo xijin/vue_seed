@@ -38,7 +38,7 @@ var doRequest = function (path, param) {
                     param.failHandler(data, data.error.message);
                 }
             } else if (data.status == 700) {
-                window.open('/ac/logout.do', '_self');
+                window.open('/ac/logout.json', '_self');
             } else if (data.status == 400 || data.status == 800) {
                 if (param.failHandler) {
                     param.failHandler(data, data.error.message);
@@ -77,11 +77,12 @@ var doRequest = function (path, param) {
             var instance = new Vue();
             Vue.http.post(path, param.data || {})
                 .then(function (data) {
-                    reqSuccess(data);
+                    var body = data.body;
+                    reqSuccess(body);
                     if (cache) {
                         // 缓存数据
                         ajaxCache[cacheId] = {
-                            content: data,
+                            content: body,
                             getTime: new Date().getTime()
                         };
                     }
