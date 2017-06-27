@@ -50,8 +50,9 @@ Object.keys(proxyTable).forEach(function (context) {
   app.use(proxyMiddleware(options.filter || context, options))
 })
 console.log('mock api----');
+
 //  mock api
-app.use('*.json', require('../webpack/mock')())
+app.use(require('../webpack/mock')())
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
@@ -81,7 +82,7 @@ devMiddleware.waitUntilValid(() => {
   console.log('> Listening at ' + uri + '\n')
   // when env is testing, don't need open it
   if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
-    opn(uri)
+    // opn(uri)
   }
   _resolve()
 })

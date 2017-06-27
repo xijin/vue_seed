@@ -6,10 +6,10 @@
 module.exports = function() {
 
     var mock = function(req, res, next) {
-
-        if (!/.json/.test(req.url) || !/hot-update/.test(req.url)) {
+        if (!/.json$/.test(req.url) || /hot-update/.test(req.url)) {
             console.log(req.url);
             next();
+            return;
         }
         console.log(req.url);
         console.log(req.method);
@@ -30,6 +30,7 @@ module.exports = function() {
                 content = decodeURIComponent(content);
                 // console.log(content);
                 var allParams = content && content.split('&');
+                console.log(allParams);
                 // console.log(allParams);
                 if (allParams && allParams.length) {
                     if (content.indexOf('params') >= 0) {
@@ -75,7 +76,6 @@ module.exports = function() {
                             } 
                         } 
                     } else {
-                        var param = null;
                         res.end(
                             JSON.stringify(
                                 mock ? mock.index(param) : {
