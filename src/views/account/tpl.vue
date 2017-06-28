@@ -11,19 +11,21 @@
             >
         </vue-table>
     </div>
+    
 </template>
 
 <script>
     import vueTable from '@/common/components/table/tpl.vue'; 
     import request from './request.js';
     import tableUtil from '@/common/utils/tableUtil';
-
+    import operate from './operate.vue';
     export default {
         data() {
             return {
                 list: [],
                 pageDto: {},
-                columnDefs: []
+                columnDefs: [],
+                operate: 'operate'
             }
         },
         created() {
@@ -34,12 +36,15 @@
         },
         methods: {
             init: function () {
+                this.$on('show-detail', function () {
+                    debugger;
+                });
             },
             getList: function () {
                 var that = this;
                 request.list().then(function (res) {
                     var data = res.data;
-                    that.columnDefs = tableUtil.getColumnDefs(data.columnDefs);
+                    that.columnDefs = tableUtil.getColumnDefs(data.columnDefs, true);
                     that.list = data.data;
                     that.pageDto = data.pageDto;
                 
@@ -48,6 +53,6 @@
                 });
             }
         },
-        components: { vueTable}
+        components: {vueTable, operate}
     }
 </script>

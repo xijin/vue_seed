@@ -1,14 +1,14 @@
 <template>
-    <div class="block" id="vue-table">
+    <div class="block" id="vue-table">   
         <el-table :data="list">
           <el-table-column
-              v-for="col of column"
+              v-for="col of column" :key="col.name"
               :prop=col.name
               :label=col.display
               :width=col.width>
-                  <template >
-                      <el-button  type="text" size="small">查看 </el-button>
-                      <el-button type="text" size="small">编辑</el-button>
+                  <template scope="scope">
+                        <component :is="col.cellTemplate" :item=scope.row></component>
+                        {{scope.row[col.name]}}
                   </template>
             </el-table-column>
           </el-table>
@@ -25,7 +25,9 @@
 </template>
 <style lang="less" src="./style.less"></style>
 <script>
+    import operate from '@/views/account/operate.vue';
     export default {
+        name: 'vue-table',
         props: {
             column: Array,
             list: Array,
@@ -38,6 +40,7 @@
             handleCurrentChange(val) {
                 this.$emit('get-list', this.pageDto);
             }
-        }
+        },
+        components: {operate}
     }
 </script>
