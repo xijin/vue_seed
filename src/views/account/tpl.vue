@@ -4,17 +4,19 @@
         <el-button type="primary">主要按钮</el-button>
         <el-button type="text">文字按钮</el-button>
         <vue-table
-            :column=columnDefs
-            :list=list
-            :page-dto=pageDto
+            :column.sync=columnDefs
+            :list.sync=list
+            :page-dto.sync=pageDto
             @get-list=getList
             >
         </vue-table>
     </div>
 </template>
+
 <script>
     import vueTable from '@/common/components/table/tpl.vue'; 
     import request from './request.js';
+    import tableUtil from '@/common/utils/tableUtil';
 
     export default {
         data() {
@@ -32,13 +34,12 @@
         },
         methods: {
             init: function () {
-                console.log(this.$root.userInfo);
             },
             getList: function () {
                 var that = this;
                 request.list().then(function (res) {
                     var data = res.data;
-                    that.columnDefs = data.columnDefs;
+                    that.columnDefs = tableUtil.getColumnDefs(data.columnDefs);
                     that.list = data.data;
                     that.pageDto = data.pageDto;
                 

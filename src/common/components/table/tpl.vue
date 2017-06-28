@@ -1,25 +1,25 @@
 <template>
     <div class="block" id="vue-table">
         <el-table :data="list">
-            <el-table-column
-              v-for="col in column"
+          <el-table-column
+              v-for="col of column"
               :prop=col.name
               :label=col.display
-              width="180">
-              <template scope="scope">
-                <el-button  type="text" size="small">查看</el-button>
-                <el-button type="text" size="small">编辑</el-button>
-              </template>
+              :width=col.width>
+                  <template >
+                      <el-button  type="text" size="small">查看 </el-button>
+                      <el-button type="text" size="small">编辑</el-button>
+                  </template>
             </el-table-column>
-      </el-table>
+          </el-table>
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page.sync="currentPage2"
-      :page-sizes="[100, 200, 300, 400]"
-      :page-size="100"
+      :current-page.sync="pageDto.pageNum"
+      :page-sizes="[10, 20, 50, 100]"
+      :page-size="pageDto.pageSize"
       layout="total, sizes, prev, pager, next"
-      :total="1000">
+      :total="pageDto.count">
     </el-pagination>
   </div>
 </template>
@@ -32,36 +32,12 @@
             pageDto: Object
         },
         methods: {
-          handleSizeChange(val) {
-            this.$emit('get-list', this.pageDto);
-          },
-          handleCurrentChange(val) {
-            this.$emit('get-list', this.pageDto);
-            console.log(`当前页: ${val}`);
-          }
-        },
-        data() {
-          return {
-            currentPage2: 5,
-            tableData: [{
-                    date: '2016-05-02',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    date: '2016-05-04',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄'
-                }, {
-                    date: '2016-05-01',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄'
-                }, {
-                    date: '2016-05-03',
-                    name: '王小虎',
-                    address: '上海市普陀区金沙江路 1516 弄'
-                }
-            ]
-          };
+            handleSizeChange(val) {
+                this.$emit('get-list', this.pageDto);
+            },
+            handleCurrentChange(val) {
+                this.$emit('get-list', this.pageDto);
+            }
         }
     }
 </script>
