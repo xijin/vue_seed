@@ -66,6 +66,8 @@ import Vue from 'vue';
 import $ from 'jquery';
 import cookie from 'js-cookie/src/js.cookie';
 import leftTab from './common/components/leftTab/tpl.vue';
+
+
 export default {
   name: 'app',
   components: {leftTab},
@@ -89,6 +91,10 @@ export default {
             .loginIn({userId: 10})
             .then(function (res) {
 
+                if (res.status !== 200) {
+                    window.location.href = 'main.do';
+                }
+
                 var data = res.data;
                 var result;
                 if (data.accountDto) {
@@ -102,7 +108,7 @@ export default {
                 result.curRole = curRole;
                 result.loginAccount = data.loginAccount;
                 result.openRoleUid = curRole.openRoleUid;
-                Vue.prototype.userInfo = result;
+                that.$root.userInfo = result;
                 that.userInfo = result;
                 that.env = {
                     "appId": "2",
@@ -127,9 +133,6 @@ export default {
     }
   } 
 }
-
-
-
 
 </script>
 <style lang="less" src="../static/resource/css/style.less"></style>
