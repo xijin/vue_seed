@@ -62,7 +62,6 @@
 <script>
 
 import commonRequest from './commonRequest';
-import Vue from 'vue';
 import $ from 'jquery';
 import cookie from 'js-cookie/src/js.cookie';
 import leftTab from './common/components/leftTab/tpl.vue';

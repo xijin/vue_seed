@@ -1,14 +1,18 @@
 <template>
     <div class="block" id="vue-table">   
-        <el-table :data="list">
+        <el-table :data="filteredData">
           <el-table-column
               v-for="col of column" :key="col.name"
               :prop=col.name
               :label=col.display
               :width=col.width>
                   <template scope="scope">
-                        <component :is="col.cellTemplate" :item=scope.row></component>
-                        {{scope.row[col.name]}}
+                        <component 
+                        :is="col.component" 
+                        :item=scope.row
+                        :is-visible='0'>
+                        </component>
+                        <span v-text="scope.row[col.name]"></span>
                   </template>
             </el-table-column>
           </el-table>
@@ -25,13 +29,36 @@
 </template>
 <style lang="less" src="./style.less"></style>
 <script>
-    import operate from '@/views/account/operate.vue';
+    import Vue from 'vue';
+
     export default {
-        name: 'vue-table',
+        name: 'vueTable',
         props: {
             column: Array,
             list: Array,
             pageDto: Object
+        },
+        computed: {
+            // 使用过滤器
+            filteredData() {
+
+              var filterMap = {};
+              this.column.forEach(function (value, index) {
+                  
+                  if (!value.dealTemplate) {
+                      filterMap[value.name] = Vue.filter(value.type);
+                  } 
+
+              });
+      
+              this.list.forEach(function (value, index) {
+                  for (name in filterMap)  {
+                      value[name] = (filterMap[name])(value[name]);
+                  }
+              });
+
+              return this.list;
+            }
         },
         methods: {
             handleSizeChange(val) {
@@ -40,7 +67,6 @@
             handleCurrentChange(val) {
                 this.$emit('get-list', this.pageDto);
             }
-        },
-        components: {operate}
+        }
     }
 </script>

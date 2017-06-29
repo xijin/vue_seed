@@ -10,6 +10,7 @@
             @get-list=getList
             >
         </vue-table>
+        <account-info v-if="isVisible"></account-info>
     </div>
     
 </template>
@@ -18,14 +19,21 @@
     import vueTable from '@/common/components/table/tpl.vue'; 
     import request from './request.js';
     import tableUtil from '@/common/utils/tableUtil';
+    import Vue from 'vue';
+
     import operate from './operate.vue';
+    Vue.component('operate', operate)
+
+    import accountInfo from './update/info.vue';
+
     export default {
         data() {
             return {
                 list: [],
                 pageDto: {},
                 columnDefs: [],
-                operate: 'operate'
+                operate: 'operate',
+                isVisible: false
             }
         },
         created() {
@@ -36,15 +44,13 @@
         },
         methods: {
             init: function () {
-                this.$on('show-detail', function () {
-                    debugger;
-                });
+
             },
             getList: function () {
                 var that = this;
                 request.list().then(function (res) {
                     var data = res.data;
-                    that.columnDefs = tableUtil.getColumnDefs(data.columnDefs, true);
+                    that.columnDefs = tableUtil.getColumnDefs(data.columnDefs);
                     that.list = data.data;
                     that.pageDto = data.pageDto;
                 
@@ -53,6 +59,6 @@
                 });
             }
         },
-        components: {vueTable, operate}
+        components: {vueTable, accountInfo}
     }
 </script>
