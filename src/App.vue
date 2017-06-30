@@ -34,20 +34,7 @@
         <!-- /.container-fluid -->
     </nav>
     <div class="app-container wrapper clearfix">
-          <div class="header">
-              <div class="title">
-                  <label class="left-title">
-                      <span>用户管理</span>
-                  </label>》
-                  <label> 角色管理</label>
-              </div>
-              <hr/>
-          </div>
-          <div class="left-nav">
-              <div>
-                  <left-tab></left-tab>
-              </div>
-          </div>
+          <left-tab></left-tab>
           <div class="right">
               <router-view></router-view>
           </div>
@@ -77,7 +64,7 @@ export default {
     };
   },
   mounted() {
-    this.checkLogin();
+      this.checkLogin();
   },
   methods: {
     /**
