@@ -13,6 +13,7 @@ import Vue from 'vue';
 Vue.use(vuex);
 
 import Account from '../views/account/store';
+import Role from '../views/role/store';
 
 export default new vuex.Store({
     state: {
@@ -21,7 +22,8 @@ export default new vuex.Store({
     mutations,
     actions,
     modules: {
-        Account
+        Account,
+        Role
     }
 });
 

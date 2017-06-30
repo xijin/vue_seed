@@ -40,7 +40,7 @@
         name: 'leftTab',
         data () {
             return {
-                hash: 'accounts'
+                hash: window.location.hash.split('#/')[1]
             }
         },
         methods: {

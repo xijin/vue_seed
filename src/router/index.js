@@ -19,7 +19,7 @@ export default new Router({
       component: Account
     },
     {
-      path: '/role',
+      path: '/roles',
       name: 'role',
       component: Role
     },

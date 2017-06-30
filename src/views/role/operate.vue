@@ -17,17 +17,18 @@
         },
         methods: {
             stop: function () {
+
                 var that = this;
                 that.$store.dispatch({
-                    type: config.ACCOUNT_STOP, 
+                    type: config.ROLE_STOP, 
                     item: this.item
                 });
 
                 MessageUtil.comfirm(
                     that, 
-                    '是否停用此账号？'
+                    '是否停用此角色？'
                     ).then(function () {
-                        request.stopAccount({id: that.item.is})
+                        request.stopRole({id: that.item.is})
                             .then(function (res) {
                                 MessageUtil.showMessage(that, '停用成功');
                             });
@@ -38,7 +39,7 @@
             },
             edit: function () {
                 this.$store.dispatch({
-                    type: config.ACCOUNT_EDIT,
+                    type: config.ROLE_EDIT,
                     item: this.item
                 });
                 this.$parent.$parent.$parent.$parent.isVisible = true;
