@@ -7,6 +7,7 @@
 <script>
     import config from './config';
     import MessageUtil from '@/common/utils/messageBoxUtil';
+    import request from './request.js';
 
     export default {
         name: 'operate',
@@ -27,9 +28,12 @@
                     that, 
                     '是否停用此账号？'
                     ).then(function () {
-                        debugger;
+                        request.stopAccount({id: that.item.is})
+                            .then(function (res) {
+                                MessageUtil.showMessage(that, '停用成功');
+                            });
                     }).catch(function () {
-                        debugger;
+                        
                     });
                 
             },

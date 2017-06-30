@@ -8,12 +8,17 @@ export default {
     },
     actions: {
         // 编辑账号
-        [config.ACCOUNT_EDIT] (state, event) {
+        [config.ACCOUNT_EDIT] ({state}, event) {
+            
             state.item = event.item;
 
         },
         // 停用账号
-        [config.ACCOUNT_STOP] (state, event) {
+        [config.ACCOUNT_STOP] ({state}, event) {
+            state.item = event.item;
+        },
+        // 创建账号
+        [config.ACCOUNT_CREAT] ({state}, event) {
             state.item = event.item;
         }
     }
