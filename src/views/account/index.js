@@ -2,6 +2,7 @@
 import vueTable from '@/common/components/table/tpl.vue'; 
 import commonConfig from '@/common/config/common.js'; 
 import request from './request.js';
+import commonRequest from '@/commonRequest.js';
 import tableUtil from '@/common/utils/tableUtil';
 import Vue from 'vue';
 
@@ -66,7 +67,7 @@ export default {
         getQueryInfo() {
             var that = this;
 
-            request
+            commonRequest
                 .getSelectInfo({
                     appId: this.query.appId
                 }).then(function (res) {

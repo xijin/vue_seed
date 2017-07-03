@@ -11,12 +11,6 @@ export default {
         var params = params || {};
         return ajaxService.send('/GET/role/list.json', {data: params});
     },
-    // 获取账户列表角色关系
-    getSelectInfo: function (params) {
-        var params = params || {};
-        return ajaxService.send('/GET/Account/appInfo.json', {data: params});
-   
-    },
     // 获取角色详细信息
     getRoleDetail: function (params) {
         var params = params || {};

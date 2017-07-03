@@ -66,22 +66,36 @@ module.exports = {
         return [
             {
                 "id": 1,
-                "name": '查询',
-                "tag": "yunying_tianyan_p_query_",
+                "name": '账号管理',
+                "tag": "yunying_usercenter_p_accountManage",
                 // 0是默认，1是非默认
                 comment: 'xxxx'
             },
             {
                 "id": 2,
-                "name": '签签',
-                "tag": "yunying_tianyan_p_qianqian_",
+                "name": '角色管理',
+                "tag": "yunying_usercenter_p_roleManage",
                 // 0是默认，1是非默认
                 comment: 'xxxx'
             },
             {
                 "id": 3,
-                "name": '直播教室',
-                "tag": "yunying_tianyan_p_live_",
+                "name": '权限管理',
+                "tag": "yunying_usercenter_p_permissionManage",
+                // 0是默认，1是非默认
+                comment: 'xxxx'
+            },
+            {
+                "id": 4,
+                "name": '操作日志',
+                "tag": "yunying_usercenter_p_logEvent",
+                // 0是默认，1是非默认
+                comment: 'xxxx'
+            },
+            {
+                "id": 5,
+                "name": '业务系统',
+                "tag": "yunying_usercenter_p_app",
                 // 0是默认，1是非默认
                 comment: 'xxxx'
             }
