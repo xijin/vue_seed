@@ -7,25 +7,38 @@
           </el-col>
         </el-form-item>
 
-        <el-form-item label="账号使用人" :label-width="formLabelWidth">
+        <el-form-item label="账号使用人" 
+          prop="username"
+          :rules=rules.username
+          :label-width="formLabelWidth">
           <el-col :span="11">
             <el-input v-model="item.username" auto-complete="off"></el-input>
           </el-col>
         </el-form-item>
 
-        <el-form-item label="真实姓名" :label-width="formLabelWidth">
+        <el-form-item 
+        prop="displayName"
+        :rules=rules.displayName
+        label="真实姓名" :label-width="formLabelWidth">
           <el-col :span="11">
             <el-input v-model="item.displayName" auto-complete="off"></el-input>
           </el-col>
         </el-form-item>
 
-        <el-form-item label="EHR岗位信息" :label-width="formLabelWidth">
+        <el-form-item label="EHR岗位信息" 
+        :rules=rules.department
+        prop="department"
+        :label-width="formLabelWidth">
           <el-col :span="11">
             <el-input v-model="item.department" auto-complete="off"></el-input>
           </el-col>
         </el-form-item>
 
-        <el-form-item label="职位" :label-width="formLabelWidth">
+        <el-form-item label="职位" 
+          :rules=rules.title
+          prop="title"
+
+          :label-width="formLabelWidth">
           <el-col :span="11">
             <el-input v-model="item.title" auto-complete="off"></el-input>
           </el-col>
@@ -97,7 +110,8 @@
               },
               roleTag: null,
               permission: [],
-              checkedPermission: []
+              checkedPermission: [],
+              rules: rules
           };
       },
       created() {
@@ -162,17 +176,48 @@
                       return val.tag;
                   })
               };
-              request.updateAccount(params).then(function (res) {
-                  
-                  MessageUtil.showMessage(that, '操作成功');
-                  that.$parent.getList();
-                  that.$parent.isVisible = false; 
+              that.$refs['item'].validate(function (valid) {
+                  if (valid) {
+                        request.updateAccount(params).then(function (res) {
 
-              }).catch(function () {
+                            MessageUtil.showMessage(that, '操作成功');
+                            that.$parent.getList();
+                            that.$parent.isVisible = false; 
 
-              })
-              
+                        }).catch(function () {
+
+                        });
+                    }
+                    else {
+                        MessageUtil.showMessage(that, '表单填写不完整！');
+                    }
+              });
+
           }
       }
     };
+
+    const rules = {
+        username: [{ 
+            required: true, 
+            message: '请输入账号使用人', 
+            trigger: 'blur'
+        }],
+        displayName: [{ 
+            required: true, 
+            message: '请输入真实姓名', 
+            trigger: 'blur'
+        }],
+        department: [{ 
+            required: true, 
+            message: '请输入EHR岗位信息', 
+            trigger: 'blur'
+        }],
+        title: [{ 
+            required: true, 
+            message: '请输入职位信息', 
+            trigger: 'blur'
+        }]  
+    };
+
 </script>

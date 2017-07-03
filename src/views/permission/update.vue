@@ -8,12 +8,18 @@
 
         </el-form-item>
 
-        <el-form-item label="权限名称" :label-width="formLabelWidth">
+        <el-form-item 
+          prop="name"
+          :rules=rules.name
+          label="权限名称" :label-width="formLabelWidth">
           <el-col :span="11">
             <el-input v-model="permission.name"  auto-complete="off"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="tag" :label-width="formLabelWidth">
+        <el-form-item 
+          prop="tag"
+          :rules=rules.tag
+          label="tag" :label-width="formLabelWidth">
           <el-col :span="11">
             <el-input v-model="permission.tag"  
             auto-complete="off"></el-input>
@@ -21,7 +27,10 @@
           <el-col><small>命名规范：XXXX</small></el-col>
         </el-form-item>
 
-        <el-form-item label="备注" :label-width="formLabelWidth">
+        <el-form-item 
+          prop="comment"
+          :rules=rules.comment
+          label="备注" :label-width="formLabelWidth">
           <el-col :span="11">
             <el-input v-model="permission.comment"  
             type="textarea"
@@ -47,7 +56,8 @@
               formLabelWidth: '200px',
               roleTag: null,
               permission: {},
-              checkedPermission: []
+              checkedPermission: [],
+              rules: rules
           };
       },
       computed: {
@@ -70,7 +80,6 @@
               if (!that.permissionId) {
                   return ;
               }
-
               request
                   .getPermissionDetail({id: that.permissionId})
                   .then(function (res) {
@@ -86,29 +95,54 @@
           },
           confirm: function () {
               var that = this;
-              var role = this.role; 
+              var permission = this.permission; 
               var params = {
-                  id: role.id,
-                  appId: this.$parent.appId,
-                  name: role.name,
-                  roleTag: role.tag,
-                  hasPermissions: this.checkedPermission.map(function (val) {
-                      return val.tag
-                  })
+                  id: permission.id,
+                  appId: this.$parent.query.appId,
+                  name: permission.name,
+                  tag: permission.tag,
+                  comment: permission.comment
+
               };
-              request.updatePermission(params).then(function (res) {
-                  
-                  MessageUtil.showMessage(that, '操作成功');
-                  that.$parent.getList();
 
-                  that.$parent.isVisible = false;
-              
-              }, function (res) {
+              that.$refs['permission'].validate(function (valid) {
+                 
+                  if (valid) {
+                      request.updatePermission(params).then(function (res) {
+                          
+                          MessageUtil.showMessage(that, '操作成功');
+                          that.$parent.getList();
 
-              })
+                          that.$parent.isVisible = false;
+                      
+                      }, function (res) {
+
+                      })
+                  }
+                  else {
+                      MessageUtil.showMessage(that, '还有未填写信息');
+                  }
                
+              });
           }
-      }
+    }
+  }
+    const rules = {
+        name: [{ 
+            required: true, 
+            message: '请输入权限名称', 
+            trigger: 'blur'
+        }],
+        tag: [{ 
+            required: true, 
+            message: '请输入权限tag', 
+            trigger: 'blur'
+        }],
+        comment: [{ 
+          maxLength: 50,  
+          message: '长度在 3 到 5 个字符', 
+          trigger: 'blur'
+        }]
     };
 
 

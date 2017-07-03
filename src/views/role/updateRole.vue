@@ -7,12 +7,18 @@
           </el-col>
         </el-form-item>
 
-        <el-form-item label="角色名称" :label-width="formLabelWidth">
+        <el-form-item 
+            prop="name"
+            :rules=rules.name
+          label="角色名称" :label-width="formLabelWidth">
           <el-col :span="11">
             <el-input v-model="role.name"  auto-complete="off"></el-input>
           </el-col>
         </el-form-item>
-        <el-form-item label="角色tag" :label-width="formLabelWidth">
+        <el-form-item 
+            prop="tag"
+            :rules=rules.tag
+          label="角色tag" :label-width="formLabelWidth">
           <el-col :span="11">
             <el-input v-model="role.tag"  
             :disabled=!!roleId
@@ -55,7 +61,8 @@
               roleTag: null,
               permission: [],
               checkedPermission: [],
-              appName: null
+              appName: null,
+              rules: rules
           };
       },
       computed: {
@@ -134,18 +141,23 @@
                       return val.tag
                   })
               };
+             that.$refs['role'].validate(function (valid) {
+                  
+                  if (valid) {
+                      request.updateRole(params).then(function (res) {
 
-              request.updateRole(params).then(function (res) {
+                          MessageUtil.showMessage(that, '操作成功');
+                          that.$parent.getList();
+                          that.$parent.isVisible = false; 
+                      
+                      }).catch(function (res) {
 
-                  MessageUtil.showMessage(that, '操作成功');
-                  that.$parent.getList();
-                  that.$parent.isVisible = false; 
-              
-              }).catch(function (res) {
-
-              });
-
-              this.$parent.isVisible = false; 
+                      });
+                  }
+                  else {
+                      MessageUtil.showMessage(that, '信息未填写完整');
+                  }
+                });
           }
       }
     };
@@ -173,6 +185,18 @@
             }
        }
     }
+    const rules = {
+        name: [{ 
+            required: true, 
+            message: '请输入角色名称', 
+            trigger: 'blur'
+        }],
+        tag: [{ 
+            required: true, 
+            message: '请输入角色tag', 
+            trigger: 'blur'
+        }]
+    };
 
 
 </script>
