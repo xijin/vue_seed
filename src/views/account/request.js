@@ -20,5 +20,10 @@ export default {
     stopAccount: function (params) {
         var params = params || {};
         return ajaxService.send('/GET/account/stop.json', {data: params}); 
+    },
+    // 添加或者编辑账号
+    updateAccount: function (params) {
+        var params = params || {};
+        return ajaxService.send('/MOD/account/info.json', {data: params}); 
     }
 }

@@ -38,10 +38,12 @@
                 
             },
             edit: function () {
+
                 this.$store.dispatch({
                     type: config.ROLE_EDIT,
                     role: this.item
                 });
+                
                 this.$parent.$parent.$parent.$parent.isVisible = true;
             } 
         }

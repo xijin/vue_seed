@@ -79,9 +79,9 @@ exports.index = function (param) {
         {
             "name": "createTime",
             "display": "帐号开通时间",
-            "type": "transEmpty",
+            "type": "dateTimeTrans",
             "dealTemplate": null,
-            "width": null,
+            "width": '120',
             "typeEnum": ""
         },
         {

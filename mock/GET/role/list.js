@@ -47,7 +47,7 @@ exports.index = function (param) {
         {
             "name": "createTime",
             "display": "创建时间",
-            "type": "transEmpty",
+            "type": "dateTimeTrans",
             "dealTemplate": null,
             "width": null,
             "typeEnum": ""

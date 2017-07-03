@@ -7,7 +7,7 @@ import tableUtil from '@/common/utils/tableUtil';
 import Vue from 'vue';
 
 import operate from './operate.vue';
-Vue.component('operate', operate);
+Vue.component('role-operate', operate);
 
 import updateRole from './updateRole.vue';
 
@@ -48,7 +48,7 @@ export default {
 
             request.list(params).then(function (res) {
                 var data = res.data;
-                that.columnDefs = tableUtil.getColumnDefs(data.columnDefs);
+                that.columnDefs = tableUtil.getColumnDefs(data.columnDefs, 'role');
                 that.list = data.data;
                 that.pageDto = data.pageDto;
             

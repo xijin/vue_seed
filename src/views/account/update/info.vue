@@ -84,6 +84,8 @@
 </template>
 <script>
     import request from '../request.js';
+    import commonRequest from '@/commonRequest.js';
+    import MessageUtil from '@/common/utils/messageBoxUtil';
 
     export default {
       data () {
@@ -106,7 +108,7 @@
           // 获取该系统账号体系信息 
           getAccountInfo: function () {
               var that = this;
-              request
+              commonRequest
                 .getSelectInfo(
                     {
                         appId: this.$parent.query.appId
@@ -150,14 +152,26 @@
               this.$parent.isVisible = false; 
           },
           confirm: function () {
+              var that = this;
               var params = {
                   id: this.item.id,
                   appId: this.app.id,
                   userName: this.item.name,
                   roleTag: this.roleTag,
-                  hasPermissions: this.checkedPermission
+                  hasPermissions: this.checkedPermission.map(function (val) {
+                      return val.tag;
+                  })
               };
-              this.$parent.isVisible = false; 
+              request.updateAccount(params).then(function (res) {
+                  
+                  MessageUtil.showMessage(that, '操作成功');
+                  that.$parent.getList();
+                  that.$parent.isVisible = false; 
+
+              }).catch(function () {
+
+              })
+              
           }
       }
     };

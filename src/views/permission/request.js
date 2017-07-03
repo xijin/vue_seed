@@ -20,5 +20,10 @@ export default {
     stopPermission: function (params) {
         var params = params || {};
         return ajaxService.send('/GET/permission/stop.json', {data: params}); 
+    },
+    // 添加或者编辑权限
+    updatePermission: function (params) {
+        var params = params || {};
+        return ajaxService.send('/MOD/permission/info.json', {data: params}); 
     }
 }

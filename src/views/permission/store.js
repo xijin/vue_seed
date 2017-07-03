@@ -9,7 +9,6 @@ export default {
     actions: {
         // 编辑权限
         [config.PERMISSION_EDIT] ({state}, event) {
-            
             state.permission = event.item;
 
         },

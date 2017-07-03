@@ -9,7 +9,7 @@ export default {
     actions: {
         // 编辑账号
         [config.ACCOUNT_EDIT] ({state}, event) {
-            
+
             state.item = event.item;
 
         },

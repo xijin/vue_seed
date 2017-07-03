@@ -1,5 +1,6 @@
 'use strict';
 import Vue from 'vue';
+import moment from 'moment';
 
 /**
  * 判断是否为空
@@ -44,3 +45,82 @@ Vue.filter('numSplit', function (value) {
         return processedIntegerPart;
     }
 });
+
+// 把无效数据处理为0
+Vue.filter('transZero', function (value) {
+    return isEmpty(value) ? '--' : value;
+
+});
+
+// 金额 / 100
+Vue.filter('transAmount', function (value) {
+    return isEmpty(value) ? '0' : value / 100;
+
+});
+
+// 日期格式化
+Vue.filter('dateTrans', function (value) {
+    if (isEmpty(value)) {
+        return '--';
+    }
+    
+    if (!value) {
+        return '--';
+    }
+
+    return moment(value).format('YYYY-MM-DD');
+
+});
+
+// 精确到分的日期格式化
+Vue.filter('accurateDateTrans', function (value) {
+    if (isEmpty(value)) {
+        return '--';
+    }
+    
+    if (!value) {
+        return '--';
+    }
+
+    return moment(value).format('YYYY-MM-DD HH:mm');
+
+});
+
+// 精确到秒的日期格式化
+Vue.filter('dateTimeTrans', function (value) {
+    if (isEmpty(value)) {
+        return '--';
+    }
+    
+    if (!value) {
+        return '--';
+    }
+
+    return moment(value).format('YYYY-MM-DD HH:mm:ss');
+
+});
+
+// 时间长度转换
+Vue.filter('hourTrans', function (value) {
+    if (isEmpty(value)) {
+        return '--';
+    }
+
+    var hour = value / 60;
+    return hour.toFixed(1) + 'h';
+
+});
+
+// 时间长度转换
+Vue.filter('hourTrans', function (value) {
+    if (isEmpty(value)) {
+        return '--';
+    }
+    
+    var hour = value / 60;
+    return hour.toFixed(1) + 'h';
+
+});
+
+
+

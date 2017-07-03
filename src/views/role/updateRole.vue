@@ -43,6 +43,8 @@
 </template>
 <script>
     import request from './request.js';
+    import commonRequest from '@/commonRequest.js';
+    import MessageUtil from '@/common/utils/messageBoxUtil';
 
     export default {
       data () {
@@ -70,7 +72,7 @@
           getSysRoleInfo: function () {
               var that = this;
 
-              request
+              commonRequest
                 .getSelectInfo(
                     {
                         appId: this.$parent.appId,
@@ -121,6 +123,7 @@
               this.$parent.isVisible = false; 
           },
           confirm: function () {
+              var that = this;
               var role = this.role; 
               var params = {
                   id: role.id,
@@ -131,16 +134,28 @@
                       return val.tag
                   })
               };
+
+              request.updateRole(params).then(function (res) {
+
+                  MessageUtil.showMessage(that, '操作成功');
+                  that.$parent.getList();
+                  that.$parent.isVisible = false; 
+              
+              }).catch(function (res) {
+
+              });
+
               this.$parent.isVisible = false; 
           }
       }
     };
 
-
     /**
      * 初始化选中
      */
+    
     function initChecked(context) {
+
         var permission = context.permission || [];
         var role = context.role;
         var checkedPermission = context.checkedPermission = [];
@@ -153,7 +168,7 @@
 
             for (let i = 0; i < length; i++) {
                 if (permission[i].tag === per.tag) {
-                  checkedPermission.push(permission[i]);
+                    checkedPermission.push(permission[i]);
                 }
             }
        }

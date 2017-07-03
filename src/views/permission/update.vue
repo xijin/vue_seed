@@ -39,6 +39,7 @@
 </template>
 <script>
     import request from './request.js';
+    import MessageUtil from '@/common/utils/messageBoxUtil';
 
     export default {
       data () {
@@ -84,6 +85,7 @@
               this.$parent.isVisible = false; 
           },
           confirm: function () {
+              var that = this;
               var role = this.role; 
               var params = {
                   id: role.id,
@@ -94,7 +96,17 @@
                       return val.tag
                   })
               };
-              this.$parent.isVisible = false; 
+              request.updatePermission(params).then(function (res) {
+                  
+                  MessageUtil.showMessage(that, '操作成功');
+                  that.$parent.getList();
+
+                  that.$parent.isVisible = false;
+              
+              }, function (res) {
+
+              })
+               
           }
       }
     };

@@ -20,5 +20,10 @@ export default {
     stopRole: function (params) {
         var params = params || {};
         return ajaxService.send('/GET/role/stop.json', {data: params}); 
+    },
+    // 添加或者编辑角色
+    updateRole: function (params) {
+        var params = params || {};
+        return ajaxService.send('/MOD/role/info.json', {data: params}); 
     }
 }
