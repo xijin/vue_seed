@@ -1,3 +1,4 @@
+
 import vueTable from '@/common/components/table/tpl.vue'; 
 import commonConfig from '@/common/config/common.js'; 
 import request from './request.js';
@@ -6,8 +7,7 @@ import Vue from 'vue';
 
 import operate from './operate.vue';
 Vue.component('operate', operate);
-
-import updateRole from './updateRole.vue';
+import permissionInfo from './update.vue';
 
 import config from './config';
 
@@ -30,8 +30,8 @@ export default {
         }
     },
     created() {
-        this.getList();
         this.getQueryInfo();
+        this.getList();
     },
     methods: {
         getList: function () {
@@ -40,6 +40,7 @@ export default {
             var params = {
                 pageDto: that.pageDto,
                 status: +query.status,
+                roleTag: query.roleTag,
                 appId: +query.appId,
                 keyword: query.keyword
             };
@@ -54,11 +55,12 @@ export default {
             
             });
         },
-        addRole: function () {
+        addAccount: function () {
             this.$store.dispatch({
-                type: config.ROLE_CREAT,
-                role: null
+                type: config.PERMISSION_CREAT,
+                item: null
             });
+
             this.isVisible = true;
         },
         getQueryInfo() {
@@ -74,6 +76,20 @@ export default {
             });
         
         },
+        changeApp: function (val) {
+            var that = this;
+            that.apps.filter(function (value, index) {
+                if (value.id == val && val !== -1) {
+                    that.roles = value.roles;
+                    that.appName = value.name;
+                }
+                if (val == -1) {
+                    that.roleTag = '-1';
+                    that.roles = [];
+                }
+            });
+            this.getList();
+        }
     },
-    components: {vueTable, updateRole}
+    components: {vueTable, permissionInfo}
 }

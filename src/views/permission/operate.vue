@@ -17,18 +17,17 @@
         },
         methods: {
             stop: function () {
-
                 var that = this;
                 that.$store.dispatch({
-                    type: config.ROLE_STOP, 
-                    role: this.item
+                    type: config.PERMISSION_STOP, 
+                    item: this.item
                 });
 
                 MessageUtil.comfirm(
                     that, 
-                    '是否停用此角色？'
+                    '是否停用此权限？'
                     ).then(function () {
-                        request.stopRole({id: that.item.is})
+                        request.stopPermission({id: that.item.id})
                             .then(function (res) {
                                 MessageUtil.showMessage(that, '停用成功');
                             });
@@ -39,8 +38,8 @@
             },
             edit: function () {
                 this.$store.dispatch({
-                    type: config.ROLE_EDIT,
-                    role: this.item
+                    type: config.PERMISSION_EDIT,
+                    item: this.item
                 });
                 this.$parent.$parent.$parent.$parent.isVisible = true;
             } 

@@ -1,66 +1,25 @@
 <template>
-    <el-dialog :title="item.id? '编辑角色': '添加角色'" :visible.sync="$parent.isVisible">
-      <el-form :model="item" ref="item">
+    <el-dialog :title="roleId? '编辑角色': '添加角色'" :visible.sync="$parent.isVisible">
+      <el-form :model="role" ref="role">
         <el-form-item label="业务系统" :label-width="formLabelWidth">
           <el-col :span="11">
-            <el-input v-model="app.name" :disabled="true" auto-complete="off"></el-input>
+            <el-input v-model="appName" :disabled="true" auto-complete="off"></el-input>
           </el-col>
         </el-form-item>
 
-        <el-form-item label="账号使用人" :label-width="formLabelWidth">
+        <el-form-item label="角色名称" :label-width="formLabelWidth">
           <el-col :span="11">
-            <el-input v-model="item.username" auto-complete="off"></el-input>
+            <el-input v-model="role.name"  auto-complete="off"></el-input>
           </el-col>
         </el-form-item>
-
-        <el-form-item label="真实姓名" :label-width="formLabelWidth">
+        <el-form-item label="角色tag" :label-width="formLabelWidth">
           <el-col :span="11">
-            <el-input v-model="item.displayName" auto-complete="off"></el-input>
+            <el-input v-model="role.tag"  
+            :disabled=!!roleId
+            auto-complete="off"></el-input>
           </el-col>
         </el-form-item>
-
-        <el-form-item label="EHR岗位信息" :label-width="formLabelWidth">
-          <el-col :span="11">
-            <el-input v-model="item.department" auto-complete="off"></el-input>
-          </el-col>
-        </el-form-item>
-
-        <el-form-item label="职位" :label-width="formLabelWidth">
-          <el-col :span="11">
-            <el-input v-model="item.title" auto-complete="off"></el-input>
-          </el-col>
-        </el-form-item>
-
-        <el-form-item label="汇报上级" :label-width="formLabelWidth">
-          <el-col :span="11">
-            <el-input v-model="item.manager" auto-complete="off"></el-input>
-          </el-col>
-        </el-form-item>
-
-        <el-form-item label="添加角色" :label-width="formLabelWidth">
-          <el-col :span="11">           
-            <el-select 
-                @change="selectRole"
-                v-if="item.currentRole&&!item.currentRole.tag"
-                v-model="roleTag" placeholder="请选择角色">
-              <el-option
-                  v-for="role in app.roles"
-                  :key=role.tag 
-                  :label=role.name
-                  :value=role.tag
-                  >    
-              </el-option>
-          </el-select>
-
-            <el-input
-                v-if="item.currentRole&&item.currentRole.tag"
-                v-model="item.currentRole.name"
-                :disabled="true"
-              > </el-input>
-
-          </el-col>
-        </el-form-item>
-        <el-form-item label="权限设置" :label-width="formLabelWidth">
+        <el-form-item label="角色权限" :label-width="formLabelWidth">
                 <el-checkbox-group 
                   v-model="checkedPermission" 
                   >
@@ -89,76 +48,116 @@
       data () {
           return {
               formLabelWidth: '200px',
-              app: {},
-              item: this.$store.state.Account.item || {
-                  currentRole: {}
-              },
+              
+              role: {},
               roleTag: null,
               permission: [],
-              checkedPermission: []
+              checkedPermission: [],
+              appName: null
           };
       },
+      computed: {
+          roleId: function () {
+              return (this.$store.state.Role.role || {}).id;
+          }
+      },
       created() {
-          this.getAccountInfo();
-          this.getAccountDetail();
+          this.getSysRoleInfo();
+          
       },
       methods: {
           // 获取该系统账号体系信息 
-          getAccountInfo: function () {
+          getSysRoleInfo: function () {
               var that = this;
+
               request
                 .getSelectInfo(
                     {
-                        appId: this.$parent.query.appId
+                        appId: this.$parent.appId,
+                        roleTag: that.role.tag
                     })
                 .then(function (res) {
 
-                  that.app = res.data[0];
+                    var app = res.data[0];
+                    that.appName = app.name;
+                    that.permission = app.roles[0].hasPermissions;
+                    
+                    that.getRoleDetail();
                 
                 }, function (res) {
 
                 });
           },
-          // 获取当前账号详情
-          getAccountDetail: function () {
+          // 获取当前角色详情
+          getRoleDetail: function () {
               var that = this;
               
-              if (!that.item.id) {
+              if (!that.roleId) {
                   return ;
               }
 
               request
-                  .getAccountDetail({id: that.item.id})
+                  .getRoleDetail({id: that.roleId})
                   .then(function (res) {
 
-                      that.item  = res.data;
-                      that.permission = res.data.currentRole.hasPermissions;
-                      that.checkedPermission = that.permission;
+                      that.role  = res.data;
+                      initChecked(that);
+                  
                   }, function (res) {
 
                   });
           },
           selectRole: function (val) {
-            var that = this;
+            
+              var that = this;
               this.app.roles.filter(function (role, index) {
-                    if (role.tag === val) {
-                        that.permission = role.hasPermissions;
-                    }
+                  if (role.tag === val) {
+                      that.permission = role.hasPermissions;
+                  }
               });
+        
           },
           cancel: function () {
               this.$parent.isVisible = false; 
           },
           confirm: function () {
+              var role = this.role; 
               var params = {
-                  id: this.item.id,
-                  appId: this.app.id,
-                  userName: this.item.name,
-                  roleTag: this.roleTag,
-                  hasPermissions: this.checkedPermission
+                  id: role.id,
+                  appId: this.$parent.appId,
+                  name: role.name,
+                  roleTag: role.tag,
+                  hasPermissions: this.checkedPermission.map(function (val) {
+                      return val.tag
+                  })
               };
               this.$parent.isVisible = false; 
           }
       }
     };
+
+
+    /**
+     * 初始化选中
+     */
+    function initChecked(context) {
+        var permission = context.permission || [];
+        var role = context.role;
+        var checkedPermission = context.checkedPermission = [];
+        var roleLength = role.hasPermissions.length;
+        
+        for (var j = 0; j < roleLength; j++) {
+            
+            var per = role.hasPermissions[j];
+            var length = permission.length;
+
+            for (let i = 0; i < length; i++) {
+                if (permission[i].tag === per.tag) {
+                  checkedPermission.push(permission[i]);
+                }
+            }
+       }
+    }
+
+
 </script>

@@ -4,7 +4,7 @@
         <h4>
               <label class="left-title">
                   <span>用户管理</span>
-              </label>》
+              </label>>>
               <small> {{title}}管理</small>
           </h4>
           <hr/>
