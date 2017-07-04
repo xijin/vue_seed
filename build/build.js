@@ -15,7 +15,7 @@ var env = process.env.NODE_ENV;
 if (env === 'dev') {
   webpackConfig = require('./webpack.dev.conf');
 }
-else if (env === 'test') {
+else if (env === 'test' || env === 'ctest') {
   webpackConfig = require('./webpack.test.conf');
 }
 else {
