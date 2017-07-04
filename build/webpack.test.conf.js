@@ -26,6 +26,6 @@ var webpackConfig = merge(baseConfig, {
 })
 
 // no need for app entry during tests
-delete webpackConfig.entry
+webpackConfig.entry
 
 module.exports = webpackConfig
