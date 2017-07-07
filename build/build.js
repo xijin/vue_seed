@@ -15,12 +15,12 @@ var env = process.env.NODE_ENV;
 if (env === 'dev') {
   webpackConfig = require('./webpack.dev.conf');
 }
-else if (env === 'test' || env === 'ctest') {
-  webpackConfig = require('./webpack.test.conf');
-}
-else {
-  webpackConfig = require('./webpack.prod.conf');
-}
+// else if (env === 'test' || env === 'ctest') {
+//   webpackConfig = require('./webpack.test.conf');
+// }
+// else {
+//   webpackConfig = require('./webpack.prod.conf');
+// }
 
 var spinner = ora('building for ' + env + '......')
 spinner.start()
