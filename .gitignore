@@ -1,12 +1,3 @@
 #log
 *.log
 
-#npm
-node_modules
-
-#build
-<<<<<<< HEAD
-dist
-=======
-dist
->>>>>>> ed8a87c259fc6d4eba7c6aba99c2ca86b76cd820
