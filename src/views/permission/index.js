@@ -41,7 +41,7 @@ export default {
             var query = that.query;
             var params = {
                 pageDto: that.pageDto,
-                status: +query.status,
+                // status: +query.status,
                 roleTag: query.roleTag,
                 appId: +query.appId,
                 keyword: query.keyword

@@ -22,7 +22,7 @@
                             </el-col>  
                         </el-form-item>
                     </el-col>
-                    <el-col :span="4">
+<!--                     <el-col :span="4">
                         <el-form-item label="状态">
                             <el-col :span="15"
                                 >
@@ -34,7 +34,7 @@
                                 </el-select>   
                             </el-col>
                         </el-form-item>
-                    </el-col>
+                    </el-col> -->
 
                     <el-col :span="5">
                         <el-form-item >
