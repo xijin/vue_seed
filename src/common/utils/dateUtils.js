@@ -56,7 +56,7 @@ export default {
 
         var parseStr = commonConfig.DATE_STR.DATE;
         var startTime = moment().hour(0).minute(0).seconds(0).toDate();
-        var endTime = moment().add(1, 'days').hour(0).minute(0).seconds(0).toDate();
+        var endTime = moment().add(15, 'days').hour(0).minute(0).seconds(0).toDate();
         
         return [startTime, endTime];
     }
