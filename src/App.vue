@@ -74,7 +74,7 @@ export default {
     checkLogin() {
         var that = this;
         commonRequest
-            .loginIn({userId: 10})
+            .loginIn({})
             .then(function (res) {
 
                 if (res.status !== 200) {
