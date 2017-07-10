@@ -55,8 +55,8 @@ export default {
     intiDateRange: function () {
 
         var parseStr = commonConfig.DATE_STR.DATE;
-        var startTime = moment().hour(0).minute(0).seconds(0).toDate();
-        var endTime = moment().add(15, 'days').hour(0).minute(0).seconds(0).toDate();
+        var startTime = moment().add(-10, 'days').hour(0).minute(0).seconds(0).toDate();
+        var endTime = moment().hour(0).minute(0).seconds(0).toDate();
         
         return [startTime, endTime];
     }
