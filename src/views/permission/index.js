@@ -51,7 +51,7 @@ export default {
                 var data = res.data;
                 that.columnDefs = tableUtil.getColumnDefs(data.columnDefs, 'permission');
                 that.list = data.data;
-                that.pageDto = data.pageDto;
+                that.pageDto = res.pageDto;
             
             }, function (res) {
             
