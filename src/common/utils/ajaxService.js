@@ -75,7 +75,7 @@ var doRequest = function (path, param) {
             reqSuccess(cachedData);
         } else {
             var instance = new Vue();
-            Vue.http.post(path, param.data || {})
+            Vue.http.post(path, param.data)
                 .then(function (data) {
                     var body = data.body;
                     reqSuccess(body);
