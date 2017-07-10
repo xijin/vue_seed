@@ -62,9 +62,11 @@
         },
         methods: {
             handleSizeChange(val) {
+                this.pageDto.pageSize = val;
                 this.$emit('get-list', this.pageDto);
             },
             handleCurrentChange(val) {
+                this.pageDto.pageNum = val;
                 this.$emit('get-list', this.pageDto);
             }
         }

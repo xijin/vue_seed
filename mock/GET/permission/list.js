@@ -11,12 +11,12 @@ exports.index = function (param) {
         status: 200,
         data: {
             data: [],
-            columnDefs: [],
-            pageDto: {
-                count: 30,
-                pageSize: 10,
-                pageNum: 1
-            }
+            columnDefs: []
+        },
+        pageDto: {
+            count: 30,
+            pageSize: 10,
+            pageNum: 1
         }
     };
     result.data.columnDefs =  [            //标题列信息
