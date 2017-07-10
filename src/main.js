@@ -25,7 +25,7 @@ var instance  = new Vue({
 
 window.tips = function(msg, type) {
     var type = type || 'warning';
-    Message({
+    ElementUI.Message({
         type: type,
         message: msg
     });
