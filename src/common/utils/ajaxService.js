@@ -25,6 +25,7 @@ var doRequest = function (path, param) {
          * @param {Object} data 返回数据
          */
         function reqSuccess(data) {
+            console.log(data);
 
             if (data.status == 200) {
                 resolve(data);
