@@ -30,8 +30,21 @@ export default {
         }
     },
     computed:  {
-        permissions: function () {
-            return this.$root.userInfo && this.$root.userInfo.currentRole.hasPermissions;
+        objTypes: function () {
+            return [
+                {
+                    name: '账号管理',
+                    value: 1
+                },
+                {
+                    name: '角色管理',
+                    value: 2
+                },
+                {
+                    name: '权限管理',
+                    value: 3
+                }
+            ];
         }
     },
     created() {
@@ -46,7 +59,7 @@ export default {
             var dateRange = dateUtil.getDateRange(that.operateTime);
             var params = {
                 pageDto: that.pageDto,
-                operationTag: query.object,
+                objType: +query.object,
                 appId: +query.appId,
                 keyword: query.keyword,
                 startDay: dateRange[0],

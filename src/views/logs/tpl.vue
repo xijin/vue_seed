@@ -2,9 +2,9 @@
     <div id="views-logs">
         <el-form ref="query" :model="query" class="query-filter">
             <el-row>
-                    <el-col :span="4">
+                    <el-col :span="5">
                         <el-form-item label="业务系统">
-                            <el-col :span="12">
+                            <el-col :span="16">
                                 <el-select
                                     @change="changeApp" 
                                     v-model="query.appId" placeholder="请选择业务系统">
@@ -22,19 +22,19 @@
                             </el-col>  
                         </el-form-item>
                     </el-col>
-                    <el-col :span="5">
+                    <el-col :span="4">
                         <el-form-item label="操作对象">
-                            <el-col :span="15"
+                            <el-col :span="14"
                                 >
                                 <el-select 
                                 @change="getList"
                                 v-model="query.object">
                                     <el-option label="全部" value="-1"></el-option>
                                     <el-option
-                                        v-for="item in permissions"
-                                        :key=item.tag 
+                                        v-for="item in objTypes"
+                                        :key=item.value 
                                         :label=item.name
-                                        :value=item.tag
+                                        :value=item.value
                                         >    
                                     </el-option>
                                 </el-select>   
