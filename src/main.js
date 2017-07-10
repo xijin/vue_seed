@@ -22,3 +22,11 @@ var instance  = new Vue({
   components: {App},
   store
 })
+
+window.tips = function(msg, type) {
+    var type = type || 'warning';
+    Message({
+        type: type,
+        message: msg
+    });
+}

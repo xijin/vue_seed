@@ -25,7 +25,6 @@ var doRequest = function (path, param) {
          * @param {Object} data 返回数据
          */
         function reqSuccess(data) {
-            console.log(data);
 
             if (data.status == 200) {
                 resolve(data);
@@ -38,6 +37,8 @@ var doRequest = function (path, param) {
                 if (param.failHandler) {
                     param.failHandler(data, data.error.message);
                 }
+                tips(data.msg);
+
             } else if (data.status == 700) {
                 window.open('/ac/logout.json', '_self');
             } else if (data.status == 400 || data.status == 800) {
@@ -52,7 +53,7 @@ var doRequest = function (path, param) {
             } else if (data.status == 0) { // 认为是302,刷新下页面
                 window.location.reload();
             } else {
-                alert('unkonwn error');
+                tips('unkown error');
             }
         }
 
