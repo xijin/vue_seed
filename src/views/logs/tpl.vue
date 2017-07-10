@@ -60,7 +60,7 @@
                         <el-form-item >
                             <el-col :span="22">    
                                 <el-input
-                                    placeholder="按账号ID，账号，姓名搜索" 
+                                    placeholder="按操作人姓名，账号搜索" 
                                     v-model="query.keyword"
                                 >
                                 </el-input>
