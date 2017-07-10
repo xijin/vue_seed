@@ -2,6 +2,8 @@
 import Vue from 'vue';
 import moment from 'moment';
 
+import commonConfig from '@/common/config/common.js';
+
 /**
  * 判断是否为空
  * @param val
@@ -119,6 +121,18 @@ Vue.filter('hourTrans', function (value) {
     
     var hour = value / 60;
     return hour.toFixed(1) + 'h';
+
+});
+
+/**
+ * 状态转换
+ */
+Vue.filter('transStatus', function (value) {
+    if (isEmpty(value)) {
+        return '--';
+    }
+
+    return commonConfig.STATUS[value];
 
 });
 

@@ -87,7 +87,7 @@ exports.index = function (param) {
         {
             "name": "status",
             "display": "状态",
-            "type": "transEmpty",
+            "type": "transStatus",
             "dealTemplate": null,
             "width": null,
             "typeEnum": ""
