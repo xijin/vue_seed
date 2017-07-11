@@ -204,7 +204,7 @@
                       return val.tag;
                   }),
                   nickName: this.item.nickName,
-                  parentId: this.item.id ? undefined: this.item.parentId
+                  parentName: this.item.id ? undefined: this.item.manager
               };
               that.$refs['item'].validate(function (valid) {
                   if (valid) {
@@ -276,7 +276,6 @@
               var obj = cell.obj;
 
               this.item.manager = cell.obj.name;
-              this.item.parentId = cell.obj.id;
           }
       }
     };
