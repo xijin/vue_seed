@@ -93,6 +93,9 @@
       computed: {
           roleId: function () {
               return (this.$store.state.Role.role || {}).id;
+          },
+          appId: function () {
+              return (this.$store.state.Role.role || {}).appId;
           }
       },
       created() {
@@ -107,7 +110,7 @@
               commonRequest
                 .getSelectInfo(
                     {
-                        appId: this.$parent.appId,
+                        appId: this.$parent.appId || this.appId,
                         roleTag: that.role.tag
                     })
                 .then(function (res) {
@@ -146,7 +149,7 @@
               commonRequest
                 .getSelectInfo(
                     {
-                        appId: this.$parent.appId,
+                        appId: this.$parent.appId || this.appId,
                     })
                 .then(function (res) {
                 
