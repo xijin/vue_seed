@@ -19,7 +19,7 @@ export default {
     // 停用账号
     stopAccount: function (params) {
         var params = params || {};
-        return ajaxService.send('/GET/account/stop.json', {data: params}); 
+        return ajaxService.send('/MOD/account/stop.json', {data: params}); 
     },
     // 添加或者编辑账号
     updateAccount: function (params) {
