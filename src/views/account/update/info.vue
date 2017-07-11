@@ -11,9 +11,15 @@
           prop="username"
           :rules=rules.username
           :label-width="formLabelWidth">
-          <el-col :span="11">
-            <el-input v-model="item.username" auto-complete="off"></el-input>
-          </el-col>
+
+          <el-autocomplete
+            v-model="item.username"
+            :fetch-suggestions="queryUserAsync"
+            placeholder="请输入内容"
+            @select="handleSelect"
+          ></el-autocomplete>
+
+
         </el-form-item>
 
         <el-form-item 
@@ -21,7 +27,9 @@
         :rules=rules.displayName
         label="真实姓名" :label-width="formLabelWidth">
           <el-col :span="11">
-            <el-input v-model="item.displayName" auto-complete="off"></el-input>
+            <el-input v-model="item.displayName" 
+            :disabled="true"
+            auto-complete="off"></el-input>
           </el-col>
         </el-form-item>
 
@@ -30,7 +38,9 @@
         prop="department"
         :label-width="formLabelWidth">
           <el-col :span="11">
-            <el-input v-model="item.department" auto-complete="off"></el-input>
+            <el-input v-model="item.department" 
+            :disabled="true"
+            auto-complete="off"></el-input>
           </el-col>
         </el-form-item>
 
@@ -99,6 +109,7 @@
     import request from '../request.js';
     import commonRequest from '@/commonRequest.js';
     import MessageUtil from '@/common/utils/messageBoxUtil';
+    import util from '@/common/utils/util';
 
     export default {
       data () {
@@ -106,13 +117,19 @@
               formLabelWidth: '200px',
               app: {},
               item: this.$store.state.Account.item || {
-                  currentRole: {}
+                  currentRole: {},
+                  username: ''
               },
               roleTag: null,
               permission: [],
               checkedPermission: [],
-              rules: rules
+              rules: rules,
+              users: []
           };
+      },
+      props: {
+          value: "displayName",
+          name: "name"
       },
       created() {
           this.getAccountInfo();
@@ -129,7 +146,7 @@
                     })
                 .then(function (res) {
 
-                  that.app = res.data[0];
+                    that.app = res.data[0];
                 
                 }, function (res) {
 
@@ -193,16 +210,42 @@
                     }
               });
 
+          },
+          queryUserAsync: function (queryStr, cb) {
+            var that = this;
+            commonRequest
+              .queryAccounts(
+                {
+                  searchKey: queryStr
+                })
+              .then(function (res) {
+                  that.users = res.data;
+                  cb(res.data.map(function (val) {
+                      return {
+                        value: util.getSuggestionValue(val), 
+                        obj: val
+                      };
+                  }));
+              });
+
+          },
+          handleSelect: function (cell) {
+              var obj = cell.obj;
+              var item = this.item;
+              item.username = obj.name;
+              item.displayName = obj.displayName;
+              item.department = obj.department;
+
           }
       }
     };
 
     const rules = {
-        username: [{ 
-            required: true, 
-            message: '请输入账号使用人', 
-            trigger: 'blur'
-        }],
+        // username: [{ 
+        //     required: true, 
+        //     message: '请输入账号使用人', 
+        //     trigger: 'blur'
+        // }],
         displayName: [{ 
             required: true, 
             message: '请输入真实姓名', 

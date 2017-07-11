@@ -39,7 +39,30 @@
                 </el-checkbox-group>
           
         </el-form-item>
-          
+          <el-form-item 
+          label="父角色名称" :label-width="formLabelWidth">
+          <el-col :span="11">
+            <el-input
+              :disabled="true"
+              v-if="roleId" 
+              v-model="role.parentRoleName"  
+              auto-complete="off">  
+              </el-input>
+
+              <el-select 
+                  v-if="!roleId"
+                  v-model="parentRoleTag" placeholder="请选择角色">
+                <el-option
+                    v-for="role in parentRoles"
+                    :key=role.tag 
+                    :label=role.name
+                    :value=role.tag
+                    >    
+                </el-option>
+            </el-select>
+
+          </el-col>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancel">取 消</el-button>
@@ -62,7 +85,9 @@
               permission: [],
               checkedPermission: [],
               appName: null,
-              rules: rules
+              rules: rules,
+              parentRoles: [],
+              parentRoleTag: ''
           };
       },
       computed: {
@@ -72,7 +97,7 @@
       },
       created() {
           this.getSysRoleInfo();
-          
+          this.getParentRoles();
       },
       methods: {
           // 获取该系统账号体系信息 
@@ -116,6 +141,21 @@
 
                   });
           },
+          getParentRoles: function () {
+            var that = this;
+              commonRequest
+                .getSelectInfo(
+                    {
+                        appId: this.$parent.appId,
+                    })
+                .then(function (res) {
+                
+                    that.parentRoles =  res.data[0].roles;
+                
+                }, function (res) {
+
+                });
+          },
           selectRole: function (val) {
             
               var that = this;
@@ -139,7 +179,8 @@
                   roleTag: role.tag,
                   hasPermissions: this.checkedPermission.map(function (val) {
                       return val.tag
-                  })
+                  }),
+                  parentRoleTag: this.roleId? undefined : this.parentRoleTag
               };
              that.$refs['role'].validate(function (valid) {
                   

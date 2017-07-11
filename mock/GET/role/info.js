@@ -19,6 +19,7 @@ exports.index = function (param) {
         name: "天眼普通用户",
         appId: 6,
         tag: "yunying_tianyan_jingli",
+        parentRoleName: '查询经理',
         status: 0,
         hasPermissions: util.getPermissions()
     };
