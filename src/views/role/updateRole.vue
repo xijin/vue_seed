@@ -110,7 +110,7 @@
               commonRequest
                 .getSelectInfo(
                     {
-                        appId: this.$parent.appId || this.appId,
+                        appId: this.$parent.query.appId || this.appId,
                         roleTag: that.role.tag
                     })
                 .then(function (res) {
@@ -149,7 +149,7 @@
               commonRequest
                 .getSelectInfo(
                     {
-                        appId: this.$parent.appId || this.appId,
+                        appId: this.$parent.query.appId || this.appId,
                     })
                 .then(function (res) {
                 
