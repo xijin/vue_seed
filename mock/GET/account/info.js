@@ -31,7 +31,7 @@ exports.index = function (param) {
     result.data = {
         id: 'xxx',// ID
         appId: 6, // 业务系统
-        title: "产品经理", // 职位
+        nickName: "产品经理", // 职位
         department: "xxx", // ehr岗位信息
         username: "dudu", // 帐号
         displayName: "李阳", // 姓名

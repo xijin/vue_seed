@@ -9,11 +9,13 @@
 
         <el-form-item label="账号使用人" 
           prop="username"
+
           :rules=rules.username
           :label-width="formLabelWidth">
 
           <el-autocomplete
             v-model="item.username"
+            :disabled="!!item.id"
             :fetch-suggestions="queryUserAsync"
             placeholder="请输入内容"
             @select="handleSelect"
@@ -45,20 +47,15 @@
         </el-form-item>
 
         <el-form-item label="职位" 
-          :rules=rules.title
-          prop="title"
+          :rules=rules.nickName
+          prop="nickName"
 
           :label-width="formLabelWidth">
           <el-col :span="11">
-            <el-input v-model="item.title" auto-complete="off"></el-input>
+            <el-input v-model="item.nickName" auto-complete="off"></el-input>
           </el-col>
         </el-form-item>
 
-        <el-form-item label="汇报上级" :label-width="formLabelWidth">
-          <el-col :span="11">
-            <el-input v-model="item.manager" auto-complete="off"></el-input>
-          </el-col>
-        </el-form-item>
 
         <el-form-item label="添加角色" :label-width="formLabelWidth">
           <el-col :span="11">           
@@ -97,6 +94,20 @@
                 </el-checkbox-group>
           
         </el-form-item>
+      <hr/>
+        <el-form-item label="汇报上级" :label-width="formLabelWidth">
+          <el-col :span="11">
+          <el-autocomplete
+            v-model="item.manager"
+            :disabled="!roleTag"
+            :autofocus="true"
+            :fetch-suggestions="querySupAsync"
+            placeholder="请输入内容"
+            @select="handleSupName"
+          ></el-autocomplete>
+
+          </el-col>
+        </el-form-item>
           
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -118,13 +129,13 @@
               app: {},
               item: this.$store.state.Account.item || {
                   currentRole: {},
-                  username: ''
+                  username: '',
+                  manager: ''
               },
               roleTag: null,
               permission: [],
               checkedPermission: [],
               rules: rules,
-              users: []
           };
       },
       props: {
@@ -191,7 +202,9 @@
                   roleTag: this.roleTag,
                   hasPermissions: this.checkedPermission.map(function (val) {
                       return val.tag;
-                  })
+                  }),
+                  nickName: this.item.nickName,
+                  parentId: this.item.id ? undefined: this.item.parentId
               };
               that.$refs['item'].validate(function (valid) {
                   if (valid) {
@@ -219,7 +232,27 @@
                   searchKey: queryStr
                 })
               .then(function (res) {
-                  that.users = res.data;
+
+                  cb(res.data.map(function (val) {
+                      return {
+                        value: util.getSuggestionValue(val), 
+                        obj: val
+                      };
+                  }));
+              });
+
+          },
+          // 汇报上级
+          querySupAsync: function (queryStr, cb) {
+            var that = this;
+            commonRequest
+              .getSupAccounts(
+                {
+                  searchKey: queryStr,
+                  roleTag: that.roleTag
+                })
+              .then(function (res) {
+
                   cb(res.data.map(function (val) {
                       return {
                         value: util.getSuggestionValue(val), 
@@ -236,6 +269,14 @@
               item.displayName = obj.displayName;
               item.department = obj.department;
 
+          },
+          // 汇报上级
+          handleSupName: function (cell) {
+              var item = this.item;
+              var obj = cell.obj;
+
+              this.item.manager = cell.obj.name;
+              this.item.parentId = cell.obj.id;
           }
       }
     };
@@ -256,7 +297,7 @@
             message: '请输入EHR岗位信息', 
             trigger: 'blur'
         }],
-        title: [{ 
+        nickName: [{ 
             required: true, 
             message: '请输入职位信息', 
             trigger: 'blur'
