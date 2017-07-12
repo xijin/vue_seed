@@ -2,7 +2,9 @@
     <el-dialog :title="permissionId? '编辑权限': '添加权限'" :visible.sync="$parent.isVisible">
       <el-form :model="permission" ref="permission">
         <el-form-item label="业务系统" :label-width="formLabelWidth">
+         
           <el-col :span="11">
+            
             <el-input v-model="appName" :disabled="true" auto-complete="off"></el-input>
           </el-col>
 
@@ -65,7 +67,7 @@
               return (this.$store.state.Permission.permission || {}).id;
           },
           appName: function () {
-              return this.$parent.appName;
+              return (this.$store.state.Permission.permission || {}).appName;
           }
       },
       created() {
