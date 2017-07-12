@@ -18,6 +18,10 @@ export default {
     getSupAccounts: function (params) {
         var params = params || {};
         return ajaxService.send('/GET/account/getSupAccounts.json', {data: params});
+    },
+    // 获取该系统所有运营权限
+    getAllPermission: function (params) {
+        var params = params || {};
+        return ajaxService.send('/GET/permission/getAll.json', {data: params});
     }
-    
 }

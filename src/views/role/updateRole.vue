@@ -106,20 +106,16 @@
           // 获取该系统账号体系信息 
           getSysRoleInfo: function () {
               var that = this;
-
               commonRequest
-                .getSelectInfo(
+                .getAllPermission(
                     {
-                        appId: this.$parent.query.appId || this.appId,
-                        roleTag: that.role.tag
+                        appId: this.$parent.query.appId || this.appId
                     })
                 .then(function (res) {
 
-                    var app = res.data[0];
-                    that.appName = app.name;
-                    that.permission = app.roles[0].hasPermissions;
-                    
-                    that.getRoleDetail();
+                    var data = res.data;
+                    that.appName = data.appName;
+                    that.permission = data.list;
                 
                 }, function (res) {
 
