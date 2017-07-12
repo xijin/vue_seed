@@ -109,7 +109,7 @@
               commonRequest
                 .getAllPermission(
                     {
-                        appId: this.$parent.query.appId && this.appId
+                        appId: that.roleId? this.appId : this.$parent.query.appId
                     })
                 .then(function (res) {
 
@@ -145,7 +145,7 @@
               commonRequest
                 .getSelectInfo(
                     {
-                        appId: this.$parent.query.appId || this.appId,
+                        appId: that.roleId? this.appId : this.$parent.query.appId
                     })
                 .then(function (res) {
                 
