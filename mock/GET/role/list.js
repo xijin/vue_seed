@@ -76,7 +76,7 @@ exports.index = function (param) {
             "appName": "天眼系统", // 职位
             "name": "天眼普通用户", // 角色
             "createTime": 16787889999, // 帐号开通时间
-            "status": 0 // 状态
+            "status": 1 // 状态
         };
         result.data.data.push(cell);
     }

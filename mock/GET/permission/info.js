@@ -18,7 +18,7 @@ exports.index = function (param) {
     result.data = {
         id: 'xxx',// ID
         appId: 6, // 业务系统id
-        appNam: "查询", // 业务系统
+        appName: "查询", // 业务系统
         name: "dudu", // 权限名称
         tag: "yunying_tianyan_query_", // tag
         comment: "我是500字备注", // 状态

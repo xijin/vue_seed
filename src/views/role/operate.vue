@@ -1,5 +1,5 @@
-<template v-if="!item.status">
-    <div>
+<template >
+    <div v-if="!item.status">
         <el-button  
         type="text" size="small" @click="stop">停用</el-button>
         <el-button  type="text" size="small" @click="edit">编辑</el-button>

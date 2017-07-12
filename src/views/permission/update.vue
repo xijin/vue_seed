@@ -85,6 +85,7 @@
                   .then(function (res) {
 
                       that.permission  = res.data;
+                      that.appName = res.data.appName
                   
                   }, function (res) {
 
@@ -98,7 +99,7 @@
               var permission = this.permission; 
               var params = {
                   id: permission.id,
-                  appId: this.$parent.query.appId,
+                  appId: this.permissionId? permission.appId : this.$parent.query.appId,
                   name: permission.name,
                   tag: permission.tag,
                   comment: permission.comment
