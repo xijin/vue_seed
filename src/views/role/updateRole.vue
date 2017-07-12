@@ -174,7 +174,7 @@
               var role = this.role; 
               var params = {
                   id: role.id,
-                  appId: this.$parent.appId,
+                  appId: that.roleId? this.appId : this.$parent.query.appId,
                   name: role.name,
                   roleTag: role.tag,
                   hasPermissions: this.checkedPermission.map(function (val) {
