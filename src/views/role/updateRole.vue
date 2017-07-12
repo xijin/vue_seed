@@ -109,7 +109,7 @@
               commonRequest
                 .getAllPermission(
                     {
-                        appId: this.$parent.query.appId || this.appId
+                        appId: this.$parent.query.appId && this.appId
                     })
                 .then(function (res) {
 
