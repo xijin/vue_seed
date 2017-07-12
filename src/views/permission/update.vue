@@ -67,12 +67,11 @@
               return (this.$store.state.Permission.permission || {}).id;
           },
           appName: function () {
-              return (this.$store.state.Permission.permission || {}).appName;
+              return (this.$store.state.Permission.permission || {}).appName || this.$parent.appName;
           }
       },
       created() {
           this.getPermissionDetail();
-          
       },
       methods: {
           // 获取当前角色详情
