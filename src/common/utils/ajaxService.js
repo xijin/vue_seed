@@ -45,7 +45,7 @@ var doRequest = function (path, param) {
                 if (param.failHandler) {
                     param.failHandler(data, data.error.message);
                 } else {
-                    console.log(data.error.message);
+                    tips(data.msg || data.message);
                 }
             } else if (data.status == 300) {
                 // 部分成功
