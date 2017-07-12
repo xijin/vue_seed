@@ -144,7 +144,6 @@
       },
       created() {
           this.getAccountInfo();
-          this.getAccountDetail();
       },
       methods: {
           // 获取该系统账号体系信息 
@@ -158,6 +157,7 @@
                 .then(function (res) {
 
                     that.app = res.data[0];
+                    this.getAccountDetail();
                 
                 }, function (res) {
 
@@ -176,8 +176,8 @@
                   .then(function (res) {
 
                       that.item  = res.data;
-                      that.permission = res.data.currentRole.hasPermissions;
-                      that.checkedPermission = that.permission;
+                      initChecked(that);
+                      
                   }, function (res) {
 
                   });
@@ -302,5 +302,32 @@
             trigger: 'blur'
         }]  
     };
+
+
+    function initChecked(context) {
+        var currentRole = context.item.currentRole;
+        var rolesPermissions = [];
+        context.app.roles.filter(function (role) {
+            if (role.tag = currentRole.tag) {
+                rolesPermissions = role.hasPermissions;
+            }
+        });
+
+
+        context.permission = rolesPermissions;
+
+        context.checkedPermission = [];
+        
+        rolesPermissions.filter(function (roles) {
+            currentRole.hasPermissions.forEach(function (val) {
+                
+                if (val.tag === roles.tag) {
+                    context.checkedPermission.push(roles)
+                }
+
+            });
+        });
+  
+    }
 
 </script>
