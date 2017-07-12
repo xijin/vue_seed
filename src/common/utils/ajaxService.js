@@ -37,7 +37,7 @@ var doRequest = function (path, param) {
                 if (param.failHandler) {
                     param.failHandler(data, data.error.message);
                 }
-                tips(data.msg);
+                tips(data.msg || data.message);
 
             } else if (data.status == 700) {
                 window.open('/ac/logout.json', '_self');
