@@ -157,7 +157,7 @@
                 .then(function (res) {
 
                     that.app = res.data[0];
-                    this.getAccountDetail();
+                    that.getAccountDetail();
                 
                 }, function (res) {
 
