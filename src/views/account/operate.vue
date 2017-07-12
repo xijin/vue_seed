@@ -27,7 +27,7 @@
                     that, 
                     '是否停用此账号？'
                     ).then(function () {
-                        request.stopAccount({id: that.item.is})
+                        request.stopAccount({id: that.item.id})
                             .then(function (res) {
                                 MessageUtil.showMessage(that, '停用成功');
                             });

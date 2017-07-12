@@ -29,7 +29,7 @@
                     that, 
                     '是否停用此角色？'
                     ).then(function () {
-                        request.stopRole({id: that.item.is})
+                        request.stopRole({id: that.item.id})
                             .then(function (res) {
                                 MessageUtil.showMessage(that, '停用成功');
                             });
