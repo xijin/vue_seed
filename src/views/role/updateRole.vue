@@ -116,6 +116,7 @@
                     var data = res.data;
                     that.appName = data.appName;
                     that.permission = data.list;
+                    that.getRoleDetail();
                 
                 }, function (res) {
 
