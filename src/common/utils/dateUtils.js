@@ -44,7 +44,7 @@ export default {
         var parseStr = commonConfig.DATE_STR.DATE;
         return [
             moment(dateRange[0]).format(parseStr), 
-            moment(dateRange[1]).format(parseStr)
+            moment(dateRange[1]).add(1, 'days').format(parseStr)
         ];
     },
     /**
