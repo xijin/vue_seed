@@ -198,7 +198,7 @@
               var params = {
                   id: this.item.id,
                   appId: this.app.id,
-                  userName: this.item.name,
+                  userName: this.item.username,
                   roleTag: this.roleTag,
                   hasPermissions: this.checkedPermission.map(function (val) {
                       return val.tag;
