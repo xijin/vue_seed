@@ -281,11 +281,11 @@
     };
 
     const rules = {
-        // username: [{ 
-        //     required: true, 
-        //     message: '请输入账号使用人', 
-        //     trigger: 'blur'
-        // }],
+        username: [{ 
+            required: true, 
+            message: '请输入账号使用人', 
+            trigger: 'blur'
+        }],
         displayName: [{ 
             required: true, 
             message: '请输入真实姓名', 
