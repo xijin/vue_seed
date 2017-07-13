@@ -29,6 +29,7 @@
                         </router-link>
                     </li>
                     <li 
+                       
                         v-on:click="isCurrent('permission')"
                         :class="{'cur': hash=='permission'}">
                             <router-link to="permission"> 
@@ -37,6 +38,7 @@
                             </router-link>
                     </li>
                     <li 
+                        
                         v-on:click="isCurrent('logs')"
                         :class="{'cur': hash=='logs'}">
                         <router-link to="logs">
@@ -50,8 +52,12 @@
 </div>
 
 </template>
+
 <style lang="less" src="./style.less" scoped></style>
+
 <script >
+    import authManage from '@/common/utils/authManage.js';
+
     var titles = {
         accounts: '账号',
         roles: '角色',
@@ -71,6 +77,18 @@
             isCurrent: function (hash) {
                 this.hash = hash;
                 this.title = titles[hash];
+            },
+            showAccount: function () {
+                return authManage.showAccount(this.$root.userInfo || {});
+            },
+            showRole: function () {
+                return authManage.showRole(this.$root.userInfo || {});
+            },
+            showPermission: function () {
+                return authManage.showPermission(this.$root.userInfo || {});
+            },
+            showLog: function () {
+                return authManage.showLog(this.$root.userInfo || {});
             }
         }
     }
