@@ -27,7 +27,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a :href="env['cas.index']">退出</a></li>
+                    <li><a :href="env['cas.app.logout']">退出</a></li>
                 </ul> 
             </div>
         </div>
