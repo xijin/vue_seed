@@ -199,7 +199,7 @@
                   id: this.item.id,
                   appId: this.app.id,
                   userName: this.item.username,
-                  roleTag: this.roleTag,
+                  roleTag: this.item.id? this.item.currentRole.tag : this.roleTag,
                   hasPermissions: this.checkedPermission.map(function (val) {
                       return val.tag;
                   }),
