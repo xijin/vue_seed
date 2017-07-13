@@ -152,7 +152,7 @@
               commonRequest
                 .getSelectInfo(
                     {
-                        appId: this.$parent.query.appId
+                        appId: this.item.id? this.item.appId : this.$parent.query.appId
                     })
                 .then(function (res) {
 

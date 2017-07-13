@@ -17,6 +17,7 @@ module.exports = function() {
         path = path.indexOf('/') === 0 ? '../mock' + path : './mock/' + path;
         var mock = require(path);
         if (req.method === 'POST') {
+            res.setHeader('content-type', 'application/json;charset=utf-8');
             var content = '';
             req.on('data', function(data) {
                 content += data;
