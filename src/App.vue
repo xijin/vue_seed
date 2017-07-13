@@ -96,12 +96,13 @@ export default {
                 result.openRoleUid = curRole.openRoleUid;
                 that.$root.userInfo = result;
                 that.userInfo = result;
-                that.env = {
-                    "appId": "2",
-                    "cas.index": "https://test-cas.genshuixue.com/cas/logout"
-                }
-            }, function (res) {
-                window.location.href = "https://test-cas.genshuixue.com/cas/logout";
+                
+                commonRequest
+                .logout().then(function (res) {
+                  
+                  that.env = res.data;
+
+                });
             }
         );
     },

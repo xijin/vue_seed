@@ -5,6 +5,9 @@ export default {
     loginIn: function (params) {
         return ajaxService.send('/ac/getAuth.json', {data: params});
     },
+    logout: function (params) {
+        return ajaxService.send('/ac/getEnv.json', {data: params});
+    },
     getSelectInfo: function (params) {
         var params = params || {};
         return ajaxService.send('/GET/account/appInfo.json', {data: params});
