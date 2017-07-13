@@ -305,14 +305,15 @@
 
 
     function initChecked(context) {
+
         var currentRole = context.item.currentRole;
         var rolesPermissions = [];
         context.app.roles.filter(function (role) {
-            if (role.tag = currentRole.tag) {
+            if (role.tag === currentRole.tag) {
+                
                 rolesPermissions = role.hasPermissions;
             }
         });
-
 
         context.permission = rolesPermissions;
 
