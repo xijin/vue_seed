@@ -96,7 +96,9 @@ export default {
                 result.openRoleUid = curRole.openRoleUid;
                 that.$root.userInfo = result;
                 that.userInfo = result;
-                
+                that.$store.commit('USER_INFO', result);
+
+
                 commonRequest
                 .logout().then(function (res) {
                   

@@ -12,15 +12,16 @@
       <div class="left-nav">
           <div>
                 <ul class="list-unstyled">
-                    <li 
+                    <li v-if="showAccount()"
                         v-on:click="isCurrent('accounts')"
-                        :class="{'cur': hash=='accounts'}" >
+                        :class="{'cur': hash=='accounts'}">
                         <a href="#/accounts">
                             <i class="icon icon-monitor"></i>
                             <span>账号管理</span>
                         </a>
                     </li>
                     <li 
+                        v-if="showRole()"
                         v-on:click="isCurrent('roles')"
                         :class="{'cur': hash=='roles'}">
                         <a href="#/roles">
@@ -29,7 +30,7 @@
                         </a>
                     </li>
                     <li 
-                       
+                       v-if="showPermission()"
                         v-on:click="isCurrent('permission')"
                         :class="{'cur': hash=='permission'}">
                             <a href="#/permission"> 
@@ -38,7 +39,7 @@
                             </a>
                     </li>
                     <li 
-                        
+                        v-if="showLog()"
                         v-on:click="isCurrent('logs')"
                         :class="{'cur': hash=='logs'}">
                         <a href="#/logs">
@@ -79,16 +80,16 @@
                 this.title = titles[hash];
             },
             showAccount: function () {
-                return authManage.showAccount(this.$root.userInfo || {});
+                return authManage.showAccount(this.$store.state.UserInfo.userInfo || {});
             },
             showRole: function () {
-                return authManage.showRole(this.$root.userInfo || {});
+                return authManage.showRole(this.$store.state.UserInfo.userInfo || {});
             },
             showPermission: function () {
-                return authManage.showPermission(this.$root.userInfo || {});
+                return authManage.showPermission(this.$store.state.UserInfo.userInfo || {});
             },
             showLog: function () {
-                return authManage.showLog(this.$root.userInfo || {});
+                return authManage.showLog(this.$store.state.UserInfo.userInfo || {});
             }
         }
     }

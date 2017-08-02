@@ -15,6 +15,7 @@ Vue.use(vuex);
 import Account from '../views/account/store';
 import Role from '../views/role/store';
 import Permission from '../views/permission/store';
+import UserInfo from '../views/store';
 
 export default new vuex.Store({
     state: {
@@ -25,7 +26,8 @@ export default new vuex.Store({
     modules: {
         Account,
         Role,
-        Permission
+        Permission,
+        UserInfo
     }
 });
 
