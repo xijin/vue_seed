@@ -122,7 +122,7 @@
                       })
                   }
                   else {
-                      MessageUtil.showMessage(that, '还有未填写信息');
+                      MessageUtil.showMessage(that, '表单未验证通过');
                   }
                
               });
@@ -141,8 +141,8 @@
             trigger: 'blur'
         }],
         comment: [{ 
-          maxLength: 50,  
-          message: '长度在 3 到 5 个字符', 
+          max: 50,  
+          message: '不超过50个字符', 
           trigger: 'blur'
         }]
     };
