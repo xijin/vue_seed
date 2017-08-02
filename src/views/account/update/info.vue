@@ -80,12 +80,10 @@
 
           </el-col>
         </el-form-item>
-        <el-form-item label="权限设置" 
-          prop="checkedPermission"
-          :rules=rules.checkedPermission
+        <el-form-item label="权限设置"
           :label-width="formLabelWidth">
                 <el-checkbox-group 
-                  v-model="item.checkedPermission" 
+                  v-model="checkedPermission" 
                   >
                       <el-checkbox 
                         v-for="cell in permission" 
@@ -135,11 +133,10 @@
                   currentRole: {},
                   username: '',
                   manager: '',
-                  checkedPermission: []
               },
               roleTag: null,
               permission: [],
-              // checkedPermission: [],
+              checkedPermission: [],
               rules: rules,
           };
       },
@@ -205,13 +202,19 @@
                   appId: this.app.id,
                   userName: this.item.username,
                   roleTag: this.item.id? this.item.currentRole.tag : this.roleTag,
-                  hasPermissions: this.item.checkedPermission.map(function (val) {
+                  hasPermissions: this.checkedPermission.map(function (val) {
                       return val.tag;
                   }),
                   nickName: this.item.nickName,
                   parentName: this.item.id ? undefined: this.item.manager
               };
               that.$refs['item'].validate(function (valid) {
+
+                  if (!params.hasPermissions.length) {
+                      MessageUtil.showMessage(that, '至少选择一个权限！');
+                      return ;
+                  }
+
                   if (valid) {
                         request.updateAccount(params).then(function (res) {
 
@@ -305,19 +308,19 @@
             required: true, 
             message: '请输入职位信息', 
             trigger: 'blur'
-        }],
-        checkedPermission: [{ 
-          type: 'array', 
-          required: true, 
-          message: '请至少选择一个权限', 
-          trigger: 'blur' 
-        }
-        // {
-        //     required: true, 
-        //     message: '请选择至少一个权限', 
-        //     trigger: 'blur'
+        }]
+        // checkedPermission: [{ 
+        //   type: 'array', 
+        //   required: true, 
+        //   message: '请至少选择一个权限', 
+        //   trigger: 'blur' 
         // }
-        ]  
+        // // {
+        // //     required: true, 
+        // //     message: '请选择至少一个权限', 
+        // //     trigger: 'blur'
+        // // }
+        // ]  
     };
 
 
@@ -334,13 +337,13 @@
 
         context.permission = rolesPermissions;
 
-        context.item.checkedPermission = [];
+        context.checkedPermission = [];
         
         rolesPermissions.filter(function (roles) {
             currentRole.hasPermissions.forEach(function (val) {
                 
                 if (val.tag === roles.tag) {
-                    context.item.checkedPermission.push(roles)
+                    context.checkedPermission.push(roles)
                 }
 
             });
