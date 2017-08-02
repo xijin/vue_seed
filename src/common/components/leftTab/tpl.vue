@@ -15,36 +15,36 @@
                     <li 
                         v-on:click="isCurrent('accounts')"
                         :class="{'cur': hash=='accounts'}" >
-                        <router-link to="accounts">
+                        <a href="#/accounts">
                             <i class="icon icon-monitor"></i>
                             <span>账号管理</span>
-                        </router-link>
+                        </a>
                     </li>
                     <li 
                         v-on:click="isCurrent('roles')"
                         :class="{'cur': hash=='roles'}">
-                        <router-link to="roles">
+                        <a href="#/roles">
                             <i class="icon icon-home"></i>
                             <span>角色管理</span>
-                        </router-link>
+                        </a>
                     </li>
                     <li 
                        
                         v-on:click="isCurrent('permission')"
                         :class="{'cur': hash=='permission'}">
-                            <router-link to="permission"> 
+                            <a href="#/permission"> 
                                 <i class="icon icon-statistics"></i>
                                 <span>权限管理</span>
-                            </router-link>
+                            </a>
                     </li>
                     <li 
                         
                         v-on:click="isCurrent('logs')"
                         :class="{'cur': hash=='logs'}">
-                        <router-link to="logs">
+                        <a href="#/logs">
                             <i class="icon icon-tool"></i>
                             <span>操作日志</span>
-                        </router-link>
+                        </a>
                     </li>
                 </ul>
           </div>
