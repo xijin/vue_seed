@@ -80,7 +80,10 @@
 
           </el-col>
         </el-form-item>
-        <el-form-item label="权限设置" :label-width="formLabelWidth">
+        <el-form-item label="权限设置" 
+          prop="checkedPermission"
+          :rules=rules.checkedPermission
+          :label-width="formLabelWidth">
                 <el-checkbox-group 
                   v-model="checkedPermission" 
                   >
@@ -229,7 +232,7 @@
             commonRequest
               .queryAccounts(
                 {
-                  searchKey: queryStr
+                  keyWord: queryStr
                 })
               .then(function (res) {
 
@@ -248,7 +251,7 @@
             commonRequest
               .getSupAccounts(
                 {
-                  searchKey: queryStr,
+                  keyWord: queryStr,
                   roleTag: that.roleTag
                 })
               .then(function (res) {
@@ -299,6 +302,11 @@
         nickName: [{ 
             required: true, 
             message: '请输入职位信息', 
+            trigger: 'blur'
+        }],
+        checkedPermission: [{
+            required: true, 
+            message: '请选择至少一个权限', 
             trigger: 'blur'
         }]  
     };
