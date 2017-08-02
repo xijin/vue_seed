@@ -85,13 +85,14 @@
           :rules=rules.checkedPermission
           :label-width="formLabelWidth">
                 <el-checkbox-group 
-                  v-model="checkedPermission" 
+                  v-model="item.checkedPermission" 
                   >
                       <el-checkbox 
                         v-for="cell in permission" 
                         :label="cell"
                         :value="cell.tag"
-                        :key="cell.tag">
+                        :key="cell.tag"
+                        name="checkedPermission">
                         {{cell.name}}  
                     </el-checkbox>
                 </el-checkbox-group>
@@ -133,11 +134,12 @@
               item: this.$store.state.Account.item || {
                   currentRole: {},
                   username: '',
-                  manager: ''
+                  manager: '',
+                  checkedPermission: []
               },
               roleTag: null,
               permission: [],
-              checkedPermission: [],
+              // checkedPermission: [],
               rules: rules,
           };
       },
@@ -203,7 +205,7 @@
                   appId: this.app.id,
                   userName: this.item.username,
                   roleTag: this.item.id? this.item.currentRole.tag : this.roleTag,
-                  hasPermissions: this.checkedPermission.map(function (val) {
+                  hasPermissions: this.item.checkedPermission.map(function (val) {
                       return val.tag;
                   }),
                   nickName: this.item.nickName,
@@ -232,7 +234,7 @@
             commonRequest
               .queryAccounts(
                 {
-                  keyWord: queryStr
+                  searchKey: queryStr
                 })
               .then(function (res) {
 
@@ -251,7 +253,7 @@
             commonRequest
               .getSupAccounts(
                 {
-                  keyWord: queryStr,
+                  keyword: queryStr,
                   roleTag: that.roleTag
                 })
               .then(function (res) {
@@ -304,11 +306,18 @@
             message: '请输入职位信息', 
             trigger: 'blur'
         }],
-        checkedPermission: [{
-            required: true, 
-            message: '请选择至少一个权限', 
-            trigger: 'blur'
-        }]  
+        checkedPermission: [{ 
+          type: 'array', 
+          required: true, 
+          message: '请至少选择一个权限', 
+          trigger: 'blur' 
+        }
+        // {
+        //     required: true, 
+        //     message: '请选择至少一个权限', 
+        //     trigger: 'blur'
+        // }
+        ]  
     };
 
 
@@ -325,13 +334,13 @@
 
         context.permission = rolesPermissions;
 
-        context.checkedPermission = [];
+        context.item.checkedPermission = [];
         
         rolesPermissions.filter(function (roles) {
             currentRole.hasPermissions.forEach(function (val) {
                 
                 if (val.tag === roles.tag) {
-                    context.checkedPermission.push(roles)
+                    context.item.checkedPermission.push(roles)
                 }
 
             });
