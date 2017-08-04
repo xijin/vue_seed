@@ -1,3 +1,1 @@
-rm -rf output/*
-export NODE_ENV=$1
-node build/build.js
+npm --cache-min 9999999 install
