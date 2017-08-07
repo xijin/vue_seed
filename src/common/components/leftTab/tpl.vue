@@ -78,6 +78,7 @@
             isCurrent: function (hash) {
                 this.hash = hash;
                 this.title = titles[hash];
+                window.location.hash = '#/' + hash;
             },
             showAccount: function () {
                 return true;
