@@ -80,7 +80,8 @@
                 this.title = titles[hash];
             },
             showAccount: function () {
-                return authManage.showAccount(this.$store.state.UserInfo.userInfo || {});
+                return true;
+                // return authManage.showAccount(this.$store.state.UserInfo.userInfo || {});
             },
             showRole: function () {
                 return authManage.showRole(this.$store.state.UserInfo.userInfo || {});
