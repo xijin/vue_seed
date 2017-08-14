@@ -210,10 +210,10 @@
               };
               that.$refs['item'].validate(function (valid) {
 
-                  if (!params.hasPermissions.length) {
-                      MessageUtil.showMessage(that, '至少选择一个权限！');
-                      return ;
-                  }
+                  // if (!params.hasPermissions.length) {
+                  //     MessageUtil.showMessage(that, '至少选择一个权限！');
+                  //     return ;
+                  // }
 
                   if (valid) {
                         request.updateAccount(params).then(function (res) {
