@@ -283,7 +283,7 @@
               var item = this.item;
               var obj = cell.obj;
 
-              this.item.manager = cell.obj.name;
+              this.item.manager = cell.obj.displayName;
           }
       }
     };
