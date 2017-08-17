@@ -8,8 +8,6 @@ import router from './router'
 import 'element-ui/lib/theme-default/index.css'
 import ElementUI from 'element-ui'
 import store from './store/index';
-
-
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
@@ -21,7 +19,7 @@ var instance  = new Vue({
   template: '<App/>',
   components: {App},
   store
-})
+});
 
 window.tips = function(msg, type) {
     var type = type || 'warning';

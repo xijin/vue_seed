@@ -37,6 +37,8 @@
                         <el-form-item >    
                               <el-button 
                                 type="primary"
+                                class="analysis-habo-log"
+                                data-habo-stype='monitor_role_add'
                                 :disabled="query.appId==-1"
                                 @click="addRole">添加角色
                                 </el-button>

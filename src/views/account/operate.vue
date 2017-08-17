@@ -1,7 +1,18 @@
 <template >
     <div v-if="item.status==='启用'">
-        <el-button  type="text" size="small" @click="stop">停用</el-button>
-        <el-button  type="text" size="small" @click="edit">编辑</el-button>
+        <el-button  
+            type="text" 
+            size="small" 
+            @click="stop" 
+            class="analysis-habo-log"
+            data-habo-stype='monitor_account_delete'>停用</el-button>
+        <el-button  
+            type="text" 
+            size="small" 
+            @click="edit"
+            class="analysis-habo-log"
+            data-habo-stype='monitor_account_edit'
+            >编辑</el-button>
     </div>
 </template>
 <script>

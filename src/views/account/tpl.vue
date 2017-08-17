@@ -70,11 +70,16 @@
                     <el-col :span="4">
                         <el-form-item >    
                              <el-button 
-                                type="primary" 
-                                @click="getList">查询
+                                type="primary"
+                                class="analysis-habo-log"
+                                data-habo-stype='monitor_account_query' 
+                                @click="getList">
+                                查询
                                 </el-button>
                               <el-button 
                                 type="primary"
+                                class="analysis-habo-log"
+                                data-habo-stype='monitor_account_add'
                                 :disabled="query.appId==-1"
                                 @click="addAccount">添加账号
                                 </el-button>

@@ -71,7 +71,9 @@
                     <el-col :span="2">
                         <el-form-item >    
                              <el-button 
-                                type="primary" 
+                                type="primary"
+                                class="analysis-habo-log"
+                                data-habo-stype='monitor_log_jquery' 
                                 @click="getList">查询
                                 </el-button>
                         </el-form-item>

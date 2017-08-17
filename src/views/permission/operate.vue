@@ -1,7 +1,12 @@
 <template>
     <div>
 <!--         <el-button  type="text" size="small" @click="stop">停用</el-button> -->
-        <el-button  type="text" size="small" @click="edit">编辑</el-button>
+        <el-button  
+            type="text" 
+            size="small" 
+            class="analysis-habo-log"
+            data-habo-stype='monitor_permission_edit'
+            @click="edit">编辑</el-button>
     </div>
 </template>
 <script>

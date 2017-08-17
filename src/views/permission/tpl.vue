@@ -50,12 +50,16 @@
                     <el-col :span="4">
                         <el-form-item >    
                              <el-button 
-                                type="primary" 
+                                type="primary"
+                                class="analysis-habo-log"
+                                data-habo-stype='monitor_permission_query' 
                                 @click="getList">查询
                                 </el-button>
                               <el-button 
                                 type="primary"
                                 :disabled="query.appId==-1"
+                                class="analysis-habo-log"
+                                data-habo-stype='monitor_permission_query'
                                 @click="addAccount">添加权限
                                 </el-button>
                         </el-form-item>

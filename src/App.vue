@@ -52,7 +52,7 @@ import commonRequest from './commonRequest';
 import $ from 'jquery';
 import cookie from 'js-cookie/src/js.cookie';
 import leftTab from './common/components/leftTab/tpl.vue';
-
+require('./common/utils/analyze')('bpg_yunying_ucenter');
 
 export default {
   name: 'app',
