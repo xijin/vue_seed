@@ -5,7 +5,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header pull-left">
                 <a class="navbar-brand logo" href="#">
-                <img alt="brand" src="/static/resource/img/logo.png"></a>
+                <img  src=""></a>
             </div>
             <div class="collapse navbar-collapse pull-right">
                 <ul class="nav navbar-nav navbar-right">
@@ -40,7 +40,7 @@
           </div>
     </div>
     <div class="footer">
-        Copyright © 2014 - 2017 跟谁学版权所有.
+        Copyright © 2017 zhanwt 版权所有.
     </div>
 
   </div>
